@@ -1,12 +1,6 @@
-import Phaser from 'phaser'
+import Phase from './Phase'
 
-export default class extends Phaser.State {
-
-    constructor({sources, nextPhase}){
-        super();
-        this.sourceArray = sources;
-        this.nextPhase = nextPhase;
-    }
+export default class extends Phase {
 
     init(){
         this.loadingStateText = this.add.text(this.world.centerX, this.world.centerY , '0%',{ font: "65px Arial", fill: "#ff0044", align: "center" })
@@ -16,19 +10,14 @@ export default class extends Phaser.State {
         })
         this.load.onLoadComplete.add(()=>{
             this.loadingStateText.text = `100%\nReady!`;
-            setTimeout(()=>this.state.start(this.nextPhase),1000);
+            setTimeout(this.toNextPhase,1000);
         })
     }
 
     preload(){
-        this.sourceArray.forEach((source)=>{
+        this.sources.forEach((source)=>{
             this.load[source.type](source.key,source.url)
         })
     }
-
-    loadComplate(){
-        this.state.start(nextPhase);
-    }
-
 
 }
