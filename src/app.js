@@ -9,6 +9,7 @@ import Loading from './phases/Loading'
 import Logo from './phases/Logo'
 import HomeScreen from './phases/HomeScreen'
 import GameA from './phases/GameA'
+import BillBoard from './phases/BillBoard'
 
 import MenuButton from './groups/MenuButton'
 
@@ -30,18 +31,35 @@ class Game extends Phaser.Game {
             {name:'Game E',phase:'GameState'}
         ]
 
-        const gameASource = [
-            {name:'道具一'},
-            {name:'Item2'},
-            {name:'Item3'},
-            {name:'Item4'}
+        // const gameASource = [
+        //     {name:'道具一'},
+        //     {name:'Item2'},
+        //     {name:'Item3'},
+        //     {name:'Item4'},
+        //     {name:'道具5'}
+        // ]
+
+        let tempName = '';
+
+        let gameASource = {items:[], types:[]};
+        gameASource.types = [
+            {name:'type1'},
+            {name:'type2'},
+            {name:'otherType'},
+            {name:'中文字'}
         ]
+
+        for(let i=1;i<21;i++){
+            tempName = gameASource.types[Math.round(Math.random()*3)].name
+            gameASource.items.push({name:tempName,type:tempName})
+        }
 
         this.state.add('Boot',new Boot({nextPhase:'LogoLoading'}))
         this.state.add('LogoLoading',new Loading({nextPhase:'Logo',sources:logoSource}))
         this.state.add('Logo',new Logo({nextPhase:'HomeScreen'}))
         this.state.add('HomeScreen',new HomeScreen({nextPhase:'GameState',gameList}))
-        this.state.add('GameA',new GameA({sources:gameASource}))
+        this.state.add('GameA',new GameA({nextPhase:'HomeScreen',sources:gameASource}))
+        this.state.add('BillBoard',new BillBoard({nextPhase:'HomeScreen'}))
 
         this.gameState = {
             create: ()=> {

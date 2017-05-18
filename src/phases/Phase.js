@@ -1,9 +1,8 @@
 import Phaser from 'phaser'
 
 export default class Phase extends Phaser.State {
-    constructor({nextPhase = undefined,sources = undefined}){
+    constructor({nextPhase = '',sources = {}}){
         super()
-        console.log(nextPhase)
         this.nextPhase = nextPhase
         this.sources = sources
 

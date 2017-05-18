@@ -20,9 +20,9 @@ const config = {
     rootDocument: '',
     hostname: 'http://'+window.location.hostname,
     httpRoot: window.location.href,
-    wannaWidth: wannaWidth,
-    wannaHeight: wannaHeight,
-    scaleRate: scaleRate
+    wannaWidth: Math.round(wannaWidth),
+    wannaHeight: Math.round(wannaHeight),
+    scaleRate: scaleRate.toFixed(5)
 }
 
 

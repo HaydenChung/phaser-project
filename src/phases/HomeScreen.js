@@ -9,6 +9,7 @@ export default class HomeScreen extends Phase {
     }
 
     preload(){
+        this.stage.backgroundColor = "#000000"
         const marginX = this.world._width/(this.gameList.length+1);
 
         this.gameList.forEach((game, index)=>{

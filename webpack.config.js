@@ -17,7 +17,7 @@ module.exports = {
         path: path.join(__dirname,'/build'),
         filename: 'bundle.js',
     },
-    watch: true,
+    // watch: true,
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.bundle.js'}),
         // new CompressionPlugin({
