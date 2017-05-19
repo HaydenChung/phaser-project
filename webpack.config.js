@@ -12,7 +12,7 @@ module.exports = {
         app: './src/app.js',
         vendor: ['pixi', 'p2', 'phaser']
     },
-    devtool: 'cheap-source-map',
+    // devtool: 'cheap-source-map',
     output: {
         path: path.join(__dirname,'/build'),
         filename: 'bundle.js',

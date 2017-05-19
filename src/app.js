@@ -9,6 +9,8 @@ import Loading from './phases/Loading'
 import Logo from './phases/Logo'
 import HomeScreen from './phases/HomeScreen'
 import GameA from './phases/GameA'
+import GameC from './phases/GameC'
+import GameD from './phases/GameD'
 import BillBoard from './phases/BillBoard'
 
 import MenuButton from './groups/MenuButton'
@@ -20,33 +22,45 @@ class Game extends Phaser.Game {
         const logoSource = [
             {type:'image',key:'background',url:config.httpRoot+'/assets/images/maxresdefault.jpg'},
             {type:'image',key:'begin',url:config.httpRoot+'/assets/images/begin.png'},
-            {type:'image',key:'protal',url:config.httpRoot+'/assets/images/protal.png'}
+            {type:'image',key:'protal',url:config.httpRoot+'/assets/images/protal.png'},
+            {type:'image',key:'bg_full',url:config.httpRoot+'/assets/images/backgrounds/bg_full.png'},
+            {type:'image',key:'bg_1_3',url:config.httpRoot+'/assets/images/backgrounds/bg_1_3.png'},
+            {type:'image',key:'bg_half',url:config.httpRoot+'/assets/images/backgrounds/bg_half.png'},
         ]
+
+        for(let i=0;i<10;i++){
+            logoSource.push({
+                type:'image',key:`bread_${i}`,url:config.httpRoot+`/assets/images/breads/bread_${i}.png`
+            })
+        }
+        for(let i=0;i<5;i++){
+            logoSource.push({
+                type:'image',key:`backet_${i}`,url:config.httpRoot+`/assets/images/backets/backet_${i}.png`
+            })
+        }
+        for(let i=0;i<6;i++){
+            logoSource.push({
+                type:'image',key:`belt_${i}`,url:config.httpRoot+`/assets/images/belts/belt_${i}.png`
+            })
+        }
 
         const gameList = [
             {name:'Game A',phase:'GameA'},
             {name:'Game B',phase:'GameState'},
-            {name:'Game C',phase:'GameState'},
-            {name:'Game D',phase:'GameState'},
+            {name:'Game C',phase:'GameC'},
+            {name:'Game D',phase:'GameD'},
             {name:'Game E',phase:'GameState'}
         ]
-
-        // const gameASource = [
-        //     {name:'道具一'},
-        //     {name:'Item2'},
-        //     {name:'Item3'},
-        //     {name:'Item4'},
-        //     {name:'道具5'}
-        // ]
 
         let tempName = '';
 
         let gameASource = {items:[], types:[]};
         gameASource.types = [
-            {name:'type1'},
-            {name:'type2'},
-            {name:'otherType'},
-            {name:'中文字'}
+            {name:'議論文'},
+            {name:'說明文'},
+            {name:'描寫文'},
+            {name:'抒情文'},
+            {name:'記敘文'},
         ]
 
         for(let i=1;i<21;i++){
@@ -58,7 +72,9 @@ class Game extends Phaser.Game {
         this.state.add('LogoLoading',new Loading({nextPhase:'Logo',sources:logoSource}))
         this.state.add('Logo',new Logo({nextPhase:'HomeScreen'}))
         this.state.add('HomeScreen',new HomeScreen({nextPhase:'GameState',gameList}))
-        this.state.add('GameA',new GameA({nextPhase:'HomeScreen',sources:gameASource}))
+        this.state.add('GameA',new GameA({nextPhase:'BillBoard',sources:gameASource}))
+        this.state.add('GameC',new GameC({nextPhase:'BillBoard',sources:gameASource}))
+        this.state.add('GameD',new GameD({nextPhase:'BillBoard',sources:gameASource}))
         this.state.add('BillBoard',new BillBoard({nextPhase:'HomeScreen'}))
 
         this.gameState = {

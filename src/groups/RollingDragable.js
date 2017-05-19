@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import Begin from '../sprites/Begin'
 import config from '../config'
+import Bread from '../sprites/Bread'
 
 export default class RollingDragable extends Phaser.Group{
     constructor({game, x, y, spriteBlock, text, itemType, parentCallback = {}}){
@@ -21,11 +22,11 @@ export default class RollingDragable extends Phaser.Group{
         this.dragStopHandler = this.dragStopHandler.bind(this)
         this.checkOverlap = this.checkOverlap.bind(this)
 
-        this.spriteBlock = this.add(spriteBlock|| new Begin({game: game, x: 0, y: 0}))
+        this.spriteBlock = typeof spriteBlock != 'undefined' ? this.add(new spriteBlock({game: game, x: 0, y: 0})): this.add(new Bread({game: game, x: 0, y: 0}))
 
         this.textBlock = game.add.text(
             0, 0, text,
-            { font: 'bold 20pt Arial', fill: 'white', align: 'left'}, this
+            { font: 'bold 20pt Arial', fill: '#4B3A2F', align: 'left', backgroundColor:'rgba(255, 255, 255, 0.5)'}, this
         )
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)
@@ -43,11 +44,11 @@ export default class RollingDragable extends Phaser.Group{
 
     dragStartHandler(){
         this.customState.dragging = true
-        this.game.world.bringToTop(this)
+        // this.game.world.bringToTop(this)
     }
 
     dragStopHandler(){
-        this.game.world.sendToBack(this)
+        // this.game.world.sendToBack(this)
         const result = this.customState.parentCallback.itemDropHandler(this, this.checkOverlap)
         if(result === null){
             this.spriteBlock.position.setTo(0)

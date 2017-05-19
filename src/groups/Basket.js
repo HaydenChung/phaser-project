@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import Protal from '../sprites/Protal'
+import Backet from '../sprites/Backet'
 import config from '../config'
 
 export default class Basket extends Phaser.Group{
@@ -13,8 +13,8 @@ export default class Basket extends Phaser.Group{
         this.x = x;
         this.y = y;
 
-        this.spriteBlock = this.add(spriteBlock|| new Protal({game: game, x:0, y:0}))
-        this.spriteBlock.angle = 90
+        this.spriteBlock = typeof spriteBlcok == 'undefined' ? this.add(new Backet({game: game, x:0, y:0})) : this.add(new spriteBlock({game: game, x:0, y:0}))
+        this.spriteBlock.reScale(0.8)
 
         this.textBlock = game.add.text(
             0, 0, typeName,
