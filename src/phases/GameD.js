@@ -2,12 +2,10 @@ import Phase from './Phase'
 import Basket from '../groups/Basket'
 import config from '../config'
 
-import GameA_Track from '../groups/GameA_Track'
-
 export default class GameC extends Phase{
-    // init(){
-    //     this.stage.backgroundColor = "#FFFFFF"
-    // }
+    init(){
+        this.stage.backgroundColor = "#FFFFFF"
+    }
 
     create(){
 
@@ -16,14 +14,14 @@ export default class GameC extends Phase{
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.machine = new GameA_Track({game: this, x:0, y: this.world._height/3*1})
+        this.itemList = []
 
+        this.sources.items.forEach((source, index)=>{
+            this.itemList.push(new Basket({game:this, x:10, y:index*20, typeName:source.name }))
+        })
+    }
 
-        // this.sources.items.forEach((source, index)=>{
-        //     let newSprite = new Basket({game:this, x:10, y:index*20, typeName:source.name })
-        //     this.add.tween(newSprite).to({x:this.world._width}, 3000, Phaser.Easing.Linear.None, true)
-        // })
-
-
+    update(){
+        this.itemList.forEach((item)=> item.x += 5)
     }
 }

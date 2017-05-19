@@ -1,7 +1,7 @@
 
 //Set canvas width and height
-let wannaWidth= 1280,
-wannaHeight= 720;
+let wannaWidth= 1920,
+wannaHeight= 947;
 const parentHeight = window.innerHeight,
 parentWidth = window.innerWidth;
 let scaleRate = 0;
@@ -24,7 +24,5 @@ const config = {
     wannaHeight: Math.round(wannaHeight),
     scaleRate: scaleRate.toFixed(5)
 }
-
-
 
 export default config
