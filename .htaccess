@@ -1,0 +1,4 @@
+
+<FilesMatch "^(bundle\.js)$">
+Header append Cache-Control "no-cache, no-store"
+</FilesMatch>

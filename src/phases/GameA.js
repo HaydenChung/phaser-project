@@ -10,8 +10,6 @@ import Baker from '../groups/Baker'
 
 import Protal from '../sprites/Protal'
 import Character from '../sprites/Character'
-import MainLogo from '../sprites/MainLogo'
-import GameLogo from '../sprites/GameLogo'
 
 import config from '../config'
 import { shuffle } from '../functions'
@@ -36,22 +34,18 @@ export default class GameA extends Phase{
 
     create(){
 
-        new Headline({game: this.game, x:0, y:0})
+        new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
 
-        this.add.existing(new MainLogo({game: this.game, x:this.world.centerX, y:10}))
-        this.add.existing(new GameLogo({game: this.game, x:50*config.scaleRate, y:50*config.scaleRate, gameName:'GameA'}))
-
-        this.returnButton = this.game.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'white', align: 'left'})
+        this.returnButton = this.game.add.text(this.world._width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
         this.returnButton.scale.setTo(config.scaleRate)
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.scoreboard = new Scoreboard({game: this.game, x:this.world._width/6 * 5, y:this.world._height/8})
-        
+        this.scoreboard = new Scoreboard({game: this.game, x:this.world._width/10 * 2, y:this.world._height/8})
+        new GameA_Track({game: this.game, x:0, y: this.world._height/3*1})        
+
+
         this.sources.items = shuffle(this.sources.items)
-
-        this.track = new GameA_Track({game: this.game, x:0, y: this.world._height/3*1})
-
         this.itemList = this.sources.items.map((source, index)=> {
             let currItem = new RollingDragable({game: this.game, x: -80*config.scaleRate, y: this.world.centerY, text: source.name, itemType: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
             this.customState.itemsDistance.push(Math.round(index* currItem.width))
@@ -61,16 +55,14 @@ export default class GameA extends Phase{
         this.customState.itemsCount = this.itemList.length
         this.customState.returnPoint = this.customState.itemsCount* this.itemList[0].width + this.world._width
 
-        this.box = new GameA_Box({game: this.game, x:0, y: this.world._height/3*1.01})
+        new GameA_Box({game: this.game, x:0, y: this.world._height/3*1.01})
 
         const targetMargin = this.world._width/(this.sources.types.length+2);
-
         this.targetList = this.sources.types.map((source, index)=>{
             return new Basket({game: this.game, x: (index+1)* targetMargin, y: this.world._height-(140*config.scaleRate), typeName: source.name})
         })
 
         this.baker = new Baker({game: this.game, x:this.world._width - targetMargin ,y: this.world._height, tagName:'麵包分發員', asset:'character_0'})
-
 
         let breadTrain = this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 50000, Phaser.Easing.Linear.None, true)
 

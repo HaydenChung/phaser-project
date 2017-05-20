@@ -11,8 +11,8 @@ export default class RollingDragable extends Phaser.Group{
             startY: y,
             parentCallback: parentCallback,
             dragging: false,
+            offTrack: false,
             itemType: itemType,
-            offTrack: false
         }
 
         this.x = x
@@ -64,7 +64,7 @@ export default class RollingDragable extends Phaser.Group{
         this.spriteBlock.inputEnabled = false;
     }
 
-    checkOverlap(targetSprite) {
-        return Phaser.Rectangle.intersects(this.spriteBlock.getBounds(), targetSprite.getBounds())
+    checkOverlap(target) {
+        return Phaser.Rectangle.contains( target.getBounds(), this.game.input.x, this.game.input.y)
     }
 }
