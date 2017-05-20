@@ -14,7 +14,7 @@ export default class Basket extends Phaser.Group{
         this.y = y;
 
         this.spriteBlock = typeof spriteBlcok == 'undefined' ? this.add(new Backet({game: game, x:0, y:0})) : this.add(new spriteBlock({game: game, x:0, y:0}))
-        this.spriteBlock.reScale(0.8)
+        this.spriteBlock.reScale(0.9)
 
         this.textBlock = game.add.text(
             0, 0, typeName,

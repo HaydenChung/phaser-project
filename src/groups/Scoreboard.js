@@ -13,8 +13,8 @@ export default class Scoreboard extends Phaser.Group{
         }
 
         this.score = game.add.text(
-            0, 0, '0/'+this.customState.totalScore,
-            { font: 'bold 20pt Arial', fill: 'red', align: 'left'}, this
+            0, 0, `分數\n0/`+this.customState.totalScore,
+            { font: 'bold 30pt Arial', fill: 'red', align: 'left'}, this
         )
 
         this.score.scale.setTo(config.scaleRate)
@@ -22,6 +22,6 @@ export default class Scoreboard extends Phaser.Group{
     }
 
     change(num){
-        this.score.setText(`${Math.round(num*this.customState.totalScore)}/${this.customState.totalScore}`)
+        this.score.setText(`分數\n${Math.round(num*this.customState.totalScore)}/${this.customState.totalScore}`)
     }
 }

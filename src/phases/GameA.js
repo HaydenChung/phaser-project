@@ -39,14 +39,14 @@ export default class GameA extends Phase{
         new Headline({game: this.game, x:0, y:0})
 
         this.add.existing(new MainLogo({game: this.game, x:this.world.centerX, y:10}))
-        this.add.existing(new GameLogo({game: this.game, x:50*config.scaleRate, y:50*config.scaleRate, gameName:'GameA'}))
+        this.add.existing(new GameLogo({game: this.game, x:30*config.scaleRate, y:30*config.scaleRate, gameName:'GameA'}))
 
-        this.returnButton = this.game.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'white', align: 'left'})
+        this.returnButton = this.game.add.text(this.world._width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
         this.returnButton.scale.setTo(config.scaleRate)
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.scoreboard = new Scoreboard({game: this.game, x:this.world._width/6 * 5, y:this.world._height/8})
+        this.scoreboard = new Scoreboard({game: this.game, x:this.world._width/10 * 2, y:this.world._height/8})
         
         this.sources.items = shuffle(this.sources.items)
 
