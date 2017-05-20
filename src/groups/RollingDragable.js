@@ -11,8 +11,8 @@ export default class RollingDragable extends Phaser.Group{
             startY: y,
             parentCallback: parentCallback,
             dragging: false,
+            offTrack: false,
             itemType: itemType,
-            offTrack: false
         }
 
         this.x = x

@@ -1,8 +1,10 @@
 import Phaser from 'phaser'
 import config from '../config'
+import MainLogo from '../sprites/MainLogo'
+import GameLogo from '../sprites/GameLogo'
 
 export default class Headline extends Phaser.Group {
-    constructor({game, x, y}){
+    constructor({game, x, y, gameName, showTitle=true}){
         super(game)
 
         this.x = x;
@@ -17,6 +19,14 @@ export default class Headline extends Phaser.Group {
         graphics.lineTo(game.world._width, 50*config.scaleRate)
 
         this.add(graphics)
+
+        if(showTitle != false){
+            this.add(new MainLogo({game: game, x:game.world.centerX, y:10}))
+        }
+
+        if(typeof gameName != 'undefined'){
+            this.add(new GameLogo({game: game, x:30*config.scaleRate, y:30*config.scaleRate, gameName:gameName}))
+        }
 
     }
 }
