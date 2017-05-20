@@ -16,7 +16,7 @@ export default class GameC extends Phase{
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.machine = new GameA_Track({game: this, x:0, y: this.world._height/3*1})
+        this.machine = new GameA_Track({game: this.game, x:0, y: this.world._height/3*1})
 
 
         // this.sources.items.forEach((source, index)=>{

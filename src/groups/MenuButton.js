@@ -8,7 +8,7 @@ export default class MenuButton extends Phaser.Group {
         this.x = x;
         this.y = y;
 
-        this.spriteBlock = this.add(spriteBlock|| new Begin({game: game, x: 0, y: 0}))
+        this.spriteBlock = typeof spriteBlock != 'undefined' ? this.add(spriteBlock) : this.add(new Begin({game: game, x: 0, y: 0}))
 
         this.textBlock = game.add.text(
             0, 0, text,

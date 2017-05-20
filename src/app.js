@@ -23,9 +23,10 @@ class Game extends Phaser.Game {
             {type:'image',key:'background',url:config.httpRoot+'/assets/images/maxresdefault.jpg'},
             {type:'image',key:'begin',url:config.httpRoot+'/assets/images/begin.png'},
             {type:'image',key:'protal',url:config.httpRoot+'/assets/images/protal.png'},
-            {type:'image',key:'bg_full',url:config.httpRoot+'/assets/images/backgrounds/bg_full.png'},
             {type:'image',key:'bg_1_3',url:config.httpRoot+'/assets/images/backgrounds/bg_1_3.png'},
-            {type:'image',key:'bg_half',url:config.httpRoot+'/assets/images/backgrounds/bg_half.png'},
+            {type:'image',key:'character_0',url:config.httpRoot+'/assets/images/characters/character_0.png'},
+            {type:'image',key:'mainLogo',url:config.httpRoot+'/assets/images/logos/main_logo.png'},
+            {type:'image',key:'GameALogo',url:config.httpRoot+'/assets/images/logos/game_a_logo.png'},
         ]
 
         for(let i=0;i<10;i++){
@@ -41,6 +42,12 @@ class Game extends Phaser.Game {
         for(let i=0;i<6;i++){
             logoSource.push({
                 type:'image',key:`belt_${i}`,url:config.httpRoot+`/assets/images/belts/belt_${i}.png`
+            })
+        }
+
+        for(let i=0;i<3;i++){
+            logoSource.push({
+                type:'image',key:`bubble_${i}`,url:config.httpRoot+`/assets/images/bubbles/Game1_bubble_${i}.png`
             })
         }
 
@@ -64,7 +71,7 @@ class Game extends Phaser.Game {
         ]
 
         for(let i=1;i<21;i++){
-            tempName = gameASource.types[Math.round(Math.random()*3)].name
+            tempName = gameASource.types[Math.floor(Math.random()*5)].name
             gameASource.items.push({name:tempName,type:tempName})
         }
 
@@ -85,7 +92,7 @@ class Game extends Phaser.Game {
                 this.returnButton.inputEnabled = true;
                 this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-                this.testGroup = new MenuButton({game:this, x:this.world.centerX, y:this.world.centerY, text: 'Hello', asset: 'begin'})
+                this.testGroup = new MenuButton({game: this, x:this.world.centerX, y:this.world.centerY, text: 'Hello', asset: 'begin'})
 
                 this.beginImg2 = this.add.sprite(100, this.world.centerY, 'begin')
                 this.beginImg2.anchor.setTo(0,0.5)
