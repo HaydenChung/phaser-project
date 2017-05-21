@@ -23,10 +23,9 @@ export default class Baker extends Phaser.Group{
         )
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)
-        // this.textBlock.setShadow(-3, 0, 'rgb(43, 175, 89)', 0);
 
-        this.isRight = this.add(new ReSprite(game, 0, -700*config.scaleRate, 'bubble_1'))
-        this.isWrong = this.add(new ReSprite(game, 0, -700*config.scaleRate, 'bubble_2'))
+        this.isRight = this.add(new ReSprite(game, 0, -this.character.height, 'bubble_1'))
+        this.isWrong = this.add(new ReSprite(game, 0, -this.character.height, 'bubble_2'))
         this.isRight.anchor.setTo(1.5,1)
         this.isWrong.anchor.setTo(1.5,1)
         this.isRight.reScale(.7)

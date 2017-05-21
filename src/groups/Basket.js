@@ -23,5 +23,16 @@ export default class Basket extends Phaser.Group{
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)
 
+        this.addBread = this.addBread.bind(this)
+    }
+
+    addBread(breadObject){
+        if(typeof breadObject.parent != undefined)breadObject.parent.remove(breadObject)
+        this.add(breadObject)
+        let randomNum = Math.random()-0.5
+        breadObject.x = this.spriteBlock.width/2*(randomNum)
+        breadObject.y = -this.spriteBlock.height/2
+        breadObject.angle = 180*-randomNum
+        this.bringToTop(breadObject)
     }
 }

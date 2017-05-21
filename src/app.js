@@ -15,6 +15,8 @@ import BillBoard from './phases/BillBoard'
 
 import MenuButton from './groups/MenuButton'
 
+import {gameASources, gameCSources, } from './stores/initDate'
+
 class Game extends Phaser.Game {
     constructor(width, height){
         super(width, height, Phaser.AUTO);
@@ -59,37 +61,13 @@ class Game extends Phaser.Game {
             {name:'Game E',phase:'GameState'}
         ]
 
-        let tempName = '';
-
-        let gameASource = {items:[], types:[]};
-        gameASource.types = [
-            {name:'議論文'},
-            {name:'說明文'},
-            {name:'描寫文'},
-            {name:'抒情文'},
-            {name:'記敘文'},
-        ]
-
-        for(let i=1;i<21;i++){
-            tempName = gameASource.types[Math.floor(Math.random()*5)].name
-            gameASource.items.push({name:tempName,type:tempName})
-        }
-
-        const gameCSource = [
-            {name:'groupA',items:['A1','B1','C1','D1']},
-            {name:'groupB',items:['A2','B2','C2','D2']},
-            {name:'groupC',items:['A3','B3','C3','D3']},
-            {name:'groupD',items:['A4','B4','C4','D4']},
-            {name:'groupE',items:['A5','B5','C5','D5']},
-        ]
-
         this.state.add('Boot',new Boot({nextPhase:'LogoLoading'}))
         this.state.add('LogoLoading',new Loading({nextPhase:'Logo',sources:logoSource}))
         this.state.add('Logo',new Logo({nextPhase:'HomeScreen'}))
         this.state.add('HomeScreen',new HomeScreen({nextPhase:'GameState',gameList}))
-        this.state.add('GameA',new GameA({nextPhase:'BillBoard',sources:gameASource}))
-        this.state.add('GameC',new GameC({nextPhase:'BillBoard',sources:gameCSource}))
-        this.state.add('GameD',new GameD({nextPhase:'BillBoard',sources:gameASource}))
+        this.state.add('GameA',new GameA({nextPhase:'BillBoard',sources:gameASources}))
+        this.state.add('GameC',new GameC({nextPhase:'BillBoard',sources:gameCSources}))
+        this.state.add('GameD',new GameD({nextPhase:'BillBoard',sources:gameASources}))
         this.state.add('BillBoard',new BillBoard({nextPhase:'HomeScreen'}))
 
         this.gameState = {

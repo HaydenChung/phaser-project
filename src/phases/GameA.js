@@ -13,6 +13,7 @@ import Character from '../sprites/Character'
 
 import config from '../config'
 import { shuffle } from '../functions'
+import {mouseOverlap} from '../actions/collisionCheck'
 
 export default class GameA extends Phase{
     preload(){
@@ -47,7 +48,7 @@ export default class GameA extends Phase{
 
         this.sources.items = shuffle(this.sources.items)
         this.itemList = this.sources.items.map((source, index)=> {
-            let currItem = new RollingDragable({game: this.game, x: -80*config.scaleRate, y: this.world.centerY, text: source.name, itemType: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
+            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, text: source.name, itemType: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
             this.customState.itemsDistance.push(Math.round(index* currItem.width))
             return currItem
         })
@@ -81,19 +82,20 @@ export default class GameA extends Phase{
 
     }
 
-    itemDropHandler(child, childCollisionCheck){
+    itemDropHandler(child){
         let result = null;
         let collectedCountLimiter = false;
 
         //array.some() will test every array's menber with the provided callback,
         //but stop when the callback return true
         this.targetList.some((target)=>{
-            if(childCollisionCheck(target)){
+            if(child.mouseOverlap(target)){
                 if(collectedCountLimiter == false){
                     collectedCountLimiter = true
                     this.customState.collectedCount += 1
                 }
                 if(target.customState.typeName == child.customState.itemType){
+                    target.addBread(child)
                     this.customState.gameMark += 1/(this.customState.itemsCount)
                     this.scoreboard.change(this.customState.gameMark)
                     this.baker.rightAnswer()
