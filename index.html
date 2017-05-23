@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Phaser - Project</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta http-equiv="cleartype" content="on">
@@ -15,12 +16,22 @@
             margin: 0;
             padding: 0;
         }
+        canvas {
+            position:absolute; 
+            top:50%; left:50%; 
+            transform:translate(-50%,-50%);
+            -webkit-transform:translate(-50%,-50%);
+        }
     </style>
 </head>
 
 <body>
 
-    <div id="content"></div>
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%)" id="content">
+        <p>Could you like to play the game in fullscreen?</p>
+        <div class="btn" id="accept_full">Yes</div>
+        <div class="btn" id="denial_full">No</div>
+    </div>
     <script src="./vendor.bundle.js"></script>
     <script src="./bundle.js"></script>
 

@@ -4,8 +4,8 @@ export default class Logo extends Phase {
 
     create(){
         this.bg = this.add.sprite(0, 0, 'background')
-        this.bg.height = this.world._height
-        this.bg.width = this.world._width
+        this.bg.height = this.world.height
+        this.bg.width = this.world.width
 
         this.protal = this.add.sprite(this.world.centerX*1.2, this.world.centerY, 'protal')
         this.protal.anchor.setTo(.5)

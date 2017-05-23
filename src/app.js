@@ -10,12 +10,16 @@ import Logo from './phases/Logo'
 import HomeScreen from './phases/HomeScreen'
 import GameA from './phases/GameA'
 import GameC from './phases/GameC'
+import GameC_sectionB from './phases/GameC_sectionB'
 import GameD from './phases/GameD'
 import BillBoard from './phases/BillBoard'
+import RequestFullScreen from './phases/RequestFullScreen'
 
 import MenuButton from './groups/MenuButton'
 
 import {gameASources, gameCSources, } from './stores/initDate'
+
+import { requestFullScreen, shuffle } from './functions'
 
 class Game extends Phaser.Game {
     constructor(width, height){
@@ -29,6 +33,7 @@ class Game extends Phaser.Game {
             {type:'image',key:'character_0',url:config.httpRoot+'/assets/images/characters/character_0.png'},
             {type:'image',key:'mainLogo',url:config.httpRoot+'/assets/images/logos/main_logo.png'},
             {type:'image',key:'GameALogo',url:config.httpRoot+'/assets/images/logos/game_a_logo.png'},
+            {type:'image',key:'backetBack',url:config.httpRoot+'/assets/images/backets/backet_back.png'},
         ]
 
         for(let i=0;i<10;i++){
@@ -61,12 +66,16 @@ class Game extends Phaser.Game {
             {name:'Game E',phase:'GameState'}
         ]
 
+        //Game C need to shuffle at app.js as both section need the same sources
+        const randGameCSources = shuffle(gameCSources)
+
         this.state.add('Boot',new Boot({nextPhase:'LogoLoading'}))
         this.state.add('LogoLoading',new Loading({nextPhase:'Logo',sources:logoSource}))
         this.state.add('Logo',new Logo({nextPhase:'HomeScreen'}))
         this.state.add('HomeScreen',new HomeScreen({nextPhase:'GameState',gameList}))
         this.state.add('GameA',new GameA({nextPhase:'BillBoard',sources:gameASources}))
-        this.state.add('GameC',new GameC({nextPhase:'BillBoard',sources:gameCSources}))
+        this.state.add('GameC',new GameC({nextPhase:'BillBoard',sources:randGameCSources}))
+        this.state.add('GameC_sectionB',new GameC_sectionB({nextPhase:'BillBoard',sources:randGameCSources}))
         this.state.add('GameD',new GameD({nextPhase:'BillBoard',sources:gameASources}))
         this.state.add('BillBoard',new BillBoard({nextPhase:'HomeScreen'}))
 
@@ -98,7 +107,29 @@ class Game extends Phaser.Game {
 
             }
         };
+    window.addEventListener('resize',(ev)=>{
+        let wannaWidth= 1920,
+        wannaHeight= 1100;
+        const parentHeight = window.innerHeight,
+        parentWidth = window.innerWidth;
+        let scaleRate = 0;
 
+        if(wannaWidth/wannaHeight > parentWidth/parentHeight){
+            scaleRate = parentWidth/wannaWidth
+            wannaHeight = wannaHeight * scaleRate
+            wannaWidth = parentWidth
+        }else{
+            scaleRate = parentHeight/wannaHeight
+            wannaWidth = wannaWidth * scaleRate
+            wannaHeight = parentHeight
+        }
+        config.wannaWidth= Math.round(wannaWidth)
+        config.wannaHeight= Math.round(wannaHeight)
+        config.scaleRate= scaleRate.toFixed(5)
+
+        this.scale.setGameSize(config.wannaWidth, config.wannaHeight);
+
+    })
 
         this.state.add('GameState', this.gameState);
 
@@ -106,4 +137,17 @@ class Game extends Phaser.Game {
     }
 }
 
-var game = new Game(config.wannaWidth, config.wannaHeight);
+
+document.querySelector('#accept_full').addEventListener('click',(ev)=>{
+    document.querySelector('#content').style.display = 'none'
+    requestFullScreen();
+    var game = new Game(config.wannaWidth, config.wannaHeight);
+})
+
+document.querySelector('#denial_full').addEventListener('click',(ev)=>{
+    document.querySelector('#content').style.display = 'none'
+    var game = new Game(config.wannaWidth, config.wannaHeight);
+})
+
+
+config.testing = 'testtest'

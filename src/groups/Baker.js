@@ -4,7 +4,7 @@ import ReSprite from '../sprites/ReSprite'
 import config from '../config'
 
 export default class Baker extends Phaser.Group{
-    constructor({game, x, y, tagName='', asset}){
+    constructor({game, x, y, tagName='', asset, reversalBubble= false}){
         super(game)
 
         this.customState = {
@@ -24,14 +24,23 @@ export default class Baker extends Phaser.Group{
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)
 
-        this.isRight = this.add(new ReSprite(game, 0, -this.character.height, 'bubble_1'))
-        this.isWrong = this.add(new ReSprite(game, 0, -this.character.height, 'bubble_2'))
+        let bubbleLocation = reversalBubble === true ? this.character.width/2 : 0 ;
+
+        this.isRight = this.add(new ReSprite(game, bubbleLocation, -this.character.height, 'bubble_1'))
+        this.isWrong = this.add(new ReSprite(game, bubbleLocation, -this.character.height, 'bubble_2'))
         this.isRight.anchor.setTo(1.5,1)
         this.isWrong.anchor.setTo(1.5,1)
         this.isRight.reScale(.7)
         this.isWrong.reScale(.7)
         this.isRight.visible = false
         this.isWrong.visible = false
+
+        // if(reversalBubble === true){
+        //     this.isRight.unEqualScale(-.7,.7)
+        //     this.isWrong.unEqualScale(-.7,.7)
+        //     this.isRight.x = this.character.width
+        //     this.isWrong.x = this.character.width
+        // }
     }
 
     rightAnswer(){
