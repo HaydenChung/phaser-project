@@ -1,7 +1,7 @@
 
 //Set canvas width and height
 let wannaWidth= 1920,
-wannaHeight= 947;
+wannaHeight= 1100;
 const parentHeight = window.innerHeight,
 parentWidth = window.innerWidth;
 let scaleRate = 0;
@@ -16,7 +16,7 @@ if(wannaWidth/wannaHeight > parentWidth/parentHeight){
     wannaHeight = parentHeight
 }
 
-const config = {
+let config = {
     rootDocument: '',
     hostname: 'http://'+window.location.hostname,
     httpRoot: window.location.href,

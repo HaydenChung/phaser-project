@@ -4,8 +4,8 @@ export default class Logo extends Phase {
 
     create(){
         this.bg = this.add.sprite(0, 0, 'background')
-        this.bg.height = this.world._height
-        this.bg.width = this.world._width
+        this.bg.height = this.world.height
+        this.bg.width = this.world.width
 
         this.protal = this.add.sprite(this.world.centerX*1.2, this.world.centerY, 'protal')
         this.protal.anchor.setTo(.5)
@@ -15,7 +15,7 @@ export default class Logo extends Phase {
         this.beginImg.anchor.setTo(.5)
         this.beginImg.scale.setTo(-.4,.4)
 
-        this.add.tween(this.beginImg).to({x:this.world.centerX}, 1000, Phaser.Easing.Linear.None, true)
+        this.add.tween(this.beginImg).to({x:this.world.centerX}, 1500,  Phaser.Easing.Bounce.Out, true)
         .onComplete.add(()=>{
             this.add.tween(this.beginImg.scale).to({x: -.3,y: .3}, 1500, Phaser.Easing.Linear.None, true)
             .onComplete.add(()=>{

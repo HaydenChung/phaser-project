@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "phaser-ce": "^2.7.9",
+    "phaser-list-view": "^1.3.0",
     "redux": "^3.6.0"
   },
   "devDependencies": {
