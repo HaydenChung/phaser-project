@@ -5,6 +5,8 @@ import Bread from '../sprites/Bread'
 
 import ReGroup from '../groups/ReGroup'
 
+
+
 export default class RollingDragable extends ReGroup{
     constructor({game, x, y, spriteBlock, text, itemType, parentCallback = {}, actions}){
         super(game, x,  y, actions)
@@ -24,7 +26,7 @@ export default class RollingDragable extends ReGroup{
 
         this.textBlock = game.add.text(
             0, 0, text,
-            { font: 'bold 20pt Arial', fill: '#4B3A2F', align: 'left', backgroundColor:'rgba(255, 255, 255, 0.5)'}, this
+            { font: 'bold 20pt LiHei Pro Medium,Microsoft JhengHei', fill: '#4B3A2F', align: 'center', backgroundColor:'rgba(255, 255, 255, 0.5)'}, this
         )
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)

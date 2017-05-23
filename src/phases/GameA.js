@@ -13,10 +13,12 @@ import Character from '../sprites/Character'
 
 import config from '../config'
 import { shuffle } from '../functions'
-import {mouseOverlap} from '../actions/collisionCheck'
+import { mouseOverlap } from '../actions/collisionCheck'
+import { textResort } from '../actions/textManagement'
 
 export default class GameA extends Phase{
     preload(){
+
         this.customState = {
             collectedCount: 0,
             leadingPosX: 0,
@@ -28,8 +30,8 @@ export default class GameA extends Phase{
         }
 
         this.bg = this.game.add.sprite(0, 0, 'bg_1_3')
-        this.bg.height = this.world._height
-        this.bg.width = this.world._width
+        this.bg.height = this.world.height
+        this.bg.width = this.world.width
         this.itemDropHandler = this.itemDropHandler.bind(this)
     }
 
@@ -37,42 +39,43 @@ export default class GameA extends Phase{
 
         new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
 
-        this.returnButton = this.game.add.text(this.world._width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
+        this.returnButton = this.game.add.text(this.world.width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
         this.returnButton.scale.setTo(config.scaleRate)
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.scoreboard = new Scoreboard({game: this.game, x:this.world._width/10 * 2, y:this.world._height/8})
-        new GameA_Track({game: this.game, x:0, y: this.world._height/3*1})        
+        this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 2, y:this.world.height/8})
+        new GameA_Track({game: this.game, x:0, y: this.world.height/3*1})        
 
 
         this.sources.items = shuffle(this.sources.items)
         this.itemList = this.sources.items.map((source, index)=> {
-            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, text: source.name, itemType: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
+            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, text: textResort(source.name, 6), itemType: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
+            currItem.scale.setTo(1.2)
             this.customState.itemsDistance.push(Math.round(index* currItem.width))
             return currItem
         })
 
         this.customState.itemsCount = this.itemList.length
-        this.customState.returnPoint = this.customState.itemsCount* this.itemList[0].width + this.world._width
+        this.customState.returnPoint = this.customState.itemsCount* this.itemList[0].width + this.world.width
 
-        new GameA_Box({game: this.game, x:0, y: this.world._height/3*1.01})
+        new GameA_Box({game: this.game, x:0, y: this.world.height/3*1.01})
 
-        const targetMargin = this.world._width/(this.sources.types.length+2);
+        const targetMargin = this.world.width/(this.sources.types.length+2);
         this.targetList = this.sources.types.map((source, index)=>{
-            return new Basket({game: this.game, x: (index+1)* targetMargin, y: this.world._height-(140*config.scaleRate), typeName: source.name})
+            return new Basket({game: this.game, x: (index+1)* targetMargin, y: this.world.height-(140*config.scaleRate), typeName: source.name})
         })
 
-        this.baker = new Baker({game: this.game, x:this.world._width - targetMargin ,y: this.world._height, tagName:'麵包分發員', asset:'character_0'})
+        this.baker = new Baker({game: this.game, x:this.world.width - targetMargin ,y: this.world.height, tagName:'麵包分發員', asset:'character_0'})
 
-        let breadTrain = this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 50000, Phaser.Easing.Linear.None, true)
+        let breadTrain = this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 100000, Phaser.Easing.Linear.None, true)
 
         breadTrain.loop()
         breadTrain.onLoop.add(()=>{
             this.itemList = this.itemList.filter((item)=>{
                 return !item.customState.offTrack
             })
-            this.customState.returnPoint = this.itemList.length* this.itemList[0].width + this.world._width
+            this.customState.returnPoint = this.itemList.length* this.itemList[0].width + this.world.width
         })
     }
 

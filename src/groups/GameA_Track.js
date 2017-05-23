@@ -21,8 +21,8 @@ export default class GameA_Track extends Phaser.Group {
         this.trackB = this.add(new ReSprite(game, 150*config.scaleRate, 242*config.scaleRate, 'belt_1'))
         this.trackB.anchor.setTo(1,1)
 
-        game.add.tween(this.trackA).to({x: game.world._width}, 12500, Phaser.Easing.Linear.None, true).loop()
-        game.add.tween(this.trackB).to({x: game.world._width}, 12500, Phaser.Easing.Linear.None, true).loop()
+        game.add.tween(this.trackA).to({x: game.world.width}, 22500, Phaser.Easing.Linear.None, true).loop()
+        game.add.tween(this.trackB).to({x: game.world.width}, 22500, Phaser.Easing.Linear.None, true).loop()
    
     }
 }
