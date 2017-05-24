@@ -9,6 +9,7 @@ import Loading from './phases/Loading'
 import Logo from './phases/Logo'
 import HomeScreen from './phases/HomeScreen'
 import GameA from './phases/GameA'
+import GameB_sectionB from './phases/GameB_sectionB'
 import GameC from './phases/GameC'
 import GameC_sectionB from './phases/GameC_sectionB'
 import GameD from './phases/GameD'
@@ -17,7 +18,7 @@ import RequestFullScreen from './phases/RequestFullScreen'
 
 import MenuButton from './groups/MenuButton'
 
-import {gameASources, gameCSources, } from './stores/initDate'
+import {gameASources, gameBSources,gameCSources, } from './stores/initDate'
 
 import { requestFullScreen, shuffle } from './functions'
 
@@ -60,7 +61,7 @@ class Game extends Phaser.Game {
 
         const gameList = [
             {name:'Game A',phase:'GameA'},
-            {name:'Game B',phase:'GameState'},
+            {name:'Game B',phase:'GameB'},
             {name:'Game C',phase:'GameC'},
             {name:'Game D',phase:'GameD'},
             {name:'Game E',phase:'GameState'}
@@ -74,7 +75,8 @@ class Game extends Phaser.Game {
         this.state.add('Logo',new Logo({nextPhase:'HomeScreen'}))
         this.state.add('HomeScreen',new HomeScreen({nextPhase:'GameState',gameList}))
         this.state.add('GameA',new GameA({nextPhase:'BillBoard',sources:gameASources}))
-        this.state.add('GameC',new GameC({nextPhase:'BillBoard',sources:randGameCSources}))
+        this.state.add('GameB',new GameB_sectionB({nextPhase:'BillBoard',sources:gameBSources.sectionB}))
+        this.state.add('GameC',new GameC({nextPhase:'GameC_sectionB',sources:randGameCSources}))
         this.state.add('GameC_sectionB',new GameC_sectionB({nextPhase:'BillBoard',sources:randGameCSources}))
         this.state.add('GameD',new GameD({nextPhase:'BillBoard',sources:gameASources}))
         this.state.add('BillBoard',new BillBoard({nextPhase:'HomeScreen'}))
@@ -87,7 +89,7 @@ class Game extends Phaser.Game {
                 this.returnButton.inputEnabled = true;
                 this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-                this.testGroup = new MenuButton({game: this, x:this.world.centerX, y:this.world.centerY, text: 'Hello', asset: 'begin'})
+                this.testGroup = new MenuButton({game: this, x:this.world.centerX, y:this.world.centerY, text: 'Hello', asset: 'begin', inputUpCallback:()=>{}})
 
                 this.beginImg2 = this.add.sprite(100, this.world.centerY, 'begin')
                 this.beginImg2.anchor.setTo(0,0.5)

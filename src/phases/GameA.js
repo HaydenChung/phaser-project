@@ -47,10 +47,14 @@ export default class GameA extends Phase{
         this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
         new GameA_Track({game: this.game, x:0, y: this.world.height/3*1})        
 
+        const targetMargin = this.world.width/(this.sources.types.length+2);
+        this.targetList = this.sources.types.map((source, index)=>{
+            return new Basket({game: this.game, x: (index+1)* targetMargin, y: this.world.height-(140*config.scaleRate), matcherElm: source.name, displayElm: source.name})
+        })
 
         this.sources.items = shuffle(this.sources.items)
         this.itemList = this.sources.items.map((source, index)=> {
-            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, text: textResort(source.name, 6), itemType: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
+            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, displayElm: textResort(source.name, 6), matcherElm: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
             currItem.scale.setTo(1.3)
             this.customState.itemsDistance.push(Math.round(index* currItem.width))
             return currItem
@@ -60,11 +64,6 @@ export default class GameA extends Phase{
         this.customState.returnPoint = this.customState.itemsCount* this.itemList[0].width + this.world.width
 
         new GameA_Box({game: this.game, x:0, y: this.world.height/3*1.01})
-
-        const targetMargin = this.world.width/(this.sources.types.length+2);
-        this.targetList = this.sources.types.map((source, index)=>{
-            return new Basket({game: this.game, x: (index+1)* targetMargin, y: this.world.height-(140*config.scaleRate), typeName: source.name})
-        })
 
         this.baker = new Baker({game: this.game, x:this.world.width - targetMargin ,y: this.world.height, tagName:'麵包分發員', asset:'character_0'})
         this.baker.scale.setTo(1.2)
@@ -98,7 +97,7 @@ export default class GameA extends Phase{
                     collectedCountLimiter = true
                     this.customState.collectedCount += 1
                 }
-                if(target.customState.typeName == child.customState.itemType){
+                if(target.customState.matcherElm == child.customState.matcherElm){
                     target.addBread(child)
                     this.customState.gameMark += 1/(this.customState.itemsCount)
                     this.scoreboard.change(this.customState.gameMark)

@@ -4,11 +4,12 @@ import config from '../config'
 import ReSprite from '../sprites/ReSprite'
 
 export default class Basket extends Phaser.Group{
-    constructor({game, x, y, typeName, spriteBlock}){
+    constructor({game, x, y, matcherElm, displayElm, spriteBlock}){
         super(game)
 
         this.customState = {
-            typeName: typeName
+            matcherElm,
+            displayElm
         }
 
         this.x = x;
@@ -25,7 +26,7 @@ export default class Basket extends Phaser.Group{
         this.bringToTop(this.spriteBlock)
 
         this.textBlock = game.add.text(
-            0, 0, typeName,
+            0, 0, displayElm,
             { font: 'bold 40pt Arial', fill: '#4B3A2F', align:'center'}, this
         )
         this.textBlock.anchor.setTo(.5)

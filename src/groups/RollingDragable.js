@@ -8,15 +8,16 @@ import ReGroup from '../groups/ReGroup'
 
 
 export default class RollingDragable extends ReGroup{
-    constructor({game, x, y, spriteBlock, text, itemType, parentCallback = {}, actions}){
+    constructor({game, x, y, spriteBlock, displayElm, matcherElm, showType=false,parentCallback = {}, actions}){
         super(game, x,  y, actions)
 
         this.customState = {
             startY: y,
-            parentCallback: parentCallback,
+            parentCallback,
             dragging: false,
             offTrack: false,
-            itemType: itemType,
+            displayElm,
+            matcherElm
         }
 
         this.dragStartHandler = this.dragStartHandler.bind(this)
@@ -24,8 +25,10 @@ export default class RollingDragable extends ReGroup{
 
         this.spriteBlock = typeof spriteBlock != 'undefined' ? this.add(new spriteBlock({game: game, x: 0, y: 0})): this.add(new Bread({game: game, x: 0, y: 0}))
 
+        const onDisplay = showType === true ? this.customState.matcherElm : this.customState.displayElm 
+
         this.textBlock = game.add.text(
-            0, 0, text,
+            0, 0, displayElm,
             { font: 'bold 20pt LiHei Pro Medium,Microsoft JhengHei', fill: '#4B3A2F', align: 'center', backgroundColor:'rgba(255, 255, 255, 0.5)'}, this
         )
         this.textBlock.anchor.setTo(.5)

@@ -31,39 +31,65 @@ gameASources.items = [
 ]
 
 const topicBackupt = [
-<<<<<<< HEAD
-    {type:'說明文',name:'校園生活苦與樂。'},
-    {type:'說明文',name:'什麼是禮貎。'},
     {type:'說明文',name:'我心目中的理想校園。'},
-    {type:'抒情文',name:'給未來的我。'},
-    {type:'抒情文',name:'欣賞日出日落。'},
-    {type:'抒情文',name:'青春是一首樂典。'},
+    {type:'抒情文',name:'青春是一首樂曲。'},
     {type:'議論文',name:'談冒險的精神。'},
-
-=======
     {type:'記敘文',name:'最倒楣的一天。'},
     {type:'記敘文',name:'記一次獲獎的經過。'},
     {type:'記敘文',name:'旅行記趣。'},
     {type:'記敘文',name:'記一次學校運動會。'},
     {type:'記敘文',name:'驚險的一天。'},
->>>>>>> 471a04a4462286a62693a276913116501a808644
 ]
 
-// let tempName = {}
-// for(let i=1;i<21;i++){
-//     tempName = gameASources.types[Math.floor(Math.random()*5)].name
-//     gameASources.items.push({type:tempName,name:tempName})
-// }
+export let gameBSources = {
+    sectionA:[],
+    sectionB:{
+        items:[
+            {index:'0',text:'Someting0'},
+            {index:'1',text:'Someting1'},
+            {index:'2',text:'Someting2'},
+            {index:'3',text:'Someting3'},
+            {index:'4',text:'Someting4'},
+            {index:'5',text:'Someting5'},
+            {index:'6',text:'Someting6'},
+            {index:'7',text:'Someting7'},
+            {index:'8',text:'Someting8'},
+            {index:'9',text:'Someting9'},
 
-export let gameBSources = {}
+        ],
+        targets:{
+            0:'Answer0',
+            1:'Answer1',
+            2:'Answer2',
+            3:'Answer3',
+            4:'Answer4',
+            5:'Answer5',
+            6:'Answer6',
+            7:'Answer7',
+            8:'Answer8',
+            9:'Answer9',
+            10:'Answer10',
+            11:'Answer11',
+            12:'Answer12',
+            13:'Answer13',
+            14:'Answer14',
+            15:'Answer15',
+            16:'Answer16',
+            17:'Answer17',
+            18:'Answer18',
+            19:'Answer19'
+        }
+            // {index:'0',text:'Answer0'},
+            // {index:'1',text:'Answer1'},
+            // {index:'2',text:'Answer2'},
+            // {index:'3',text:'Answer3'},
+            // {index:'4',text:'Answer4'},
+            // {index:'5',text:'Answer5'},
+            // {index:'6',text:'Answer6'},
+    }
+}
 
 export const gameCSources = [
-    // {name:'groupA',title:'了學半死像心藝',items:[
-    //     {type:'起',text:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pharetra purus leo, id semper orci consectetur vitae. Donec sed fermentum purus, mattis dictum justo. Proin eu vulputate ligula, ac auctor mauris. Maecenas tempor, enim id faucibus eleifend, enim turpis sollicitudin dolor, et accumsan orci mauris vitae massa. Etiam dapibus pellentesque sapien, et tincidunt ex semper ac. Morbi pharetra rhoncus felis non ornare. Curabitur sit amet sapien pretium, tempus ligula in, vulputate magna. Sed molestie lectus eget neque pellentesque rhoncus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris lobortis at quam consectetur luctus. Nam ac lacus vel mi fringilla ultrices at quis magna. Suspendisse commodo, dui ac luctus interdum, lorem risus blandit purus, a sodales elit lorem eget sapien.'},
-    //     {type:'承',text:'Aenean non pellentesque quam. Suspendisse potenti. Suspendisse ut neque sed eros semper varius eu vel justo. Nulla tristique purus tellus, ut sollicitudin justo vehicula in. Aliquam tincidunt lobortis nisl. Vestibulum a dui et risus tristique tincidunt. In est nunc, varius sed ante a, tincidunt mattis odio.'},
-    //     {type:'轉',text:'Integer rutrum quis arcu cursus molestie. In interdum dui quis vestibulum fringilla. Proin quis condimentum magna. Ut sed tortor in massa interdum lobortis. Curabitur non lacinia elit. In eget rutrum nibh. Nullam sodales hendrerit sem, sed scelerisque elit mattis non. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque interdum pharetra lectus, blandit elementum ex. Vivamus urna sem, iaculis sit amet dui nec, scelerisque dapibus enim. In quis blandit turpis.'},
-    //     {type:'合',text:'Proin congue accumsan euismod. Ut congue volutpat viverra. Morbi maximus risus sed est maximus, eget sodales ante accumsan. Sed at purus quam. Sed at lacinia odio. Integer vehicula vel tellus id volutpat. Aenean blandit mi vitae vestibulum ornare. Donec non velit sed orci sagittis mollis.'}
-    //     ]},
     {name:'groupB',title:'新黨經親文愛商說的家公',items:[
         {type:'起',text:`是管突此著學黃元的能司在離場也得是。`},
         {type:'承',text:`著細預隊形實呢出入兒直這，業金心想場求先。果口情，局北文中景不……遊前家想，建還可告下行一國沒證黨路如聽、口再步全。師據觀我。包影不寶著好過家心斯但性注顯究在期工已車？強眾海利無畫要。體年是往交長星嚴省要子常不們個史名有在濟識調。`},

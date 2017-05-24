@@ -36,7 +36,7 @@ export default class GameC extends Phase{
         this.bg.width = this.world.width
 
         this.textResort = this.textResort.bind(this)
-        this.onDropHandler = this.onDropHandler.bind(this)
+        this.itemDropHandler = this.itemDropHandler.bind(this)
         this.swapSection = this.swapSection.bind(this)
     }
 
@@ -69,7 +69,7 @@ export default class GameC extends Phase{
             this.selectContainer.add(
                 new TextSentence({
                     game: this.game, x: 0, y: rtextMargin, type: this.customState.textGroup[randomOrder[index]].type,
-                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.onDropHandler},
+                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.itemDropHandler},
                     text: this.customState.textGroup[randomOrder[index]].text,
                     backgroundColor: 0xA37575, textSize: this.customState.textSize,
                     lastLineLength: this.customState.textGroup[randomOrder[index]].lastLineLength
@@ -98,7 +98,7 @@ export default class GameC extends Phase{
         return {type:item.type ,text, lastLineLength}
     }
 
-    onDropHandler(child){
+    itemDropHandler(child){
         let result = null;
         let collectedCountLimiter = false;
 
