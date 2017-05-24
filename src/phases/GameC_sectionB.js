@@ -41,7 +41,7 @@ export default class GameC_B extends GameC{
             this.selectContainer.add(
                 new TextSentence({
                     game: this.game, x: 0, y: rtextMargin, type: this.customState.textGroup[randomOrder[index]].type,
-                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.sectionOneDropHandler},
+                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.onDropHandler},
                     text: this.customState.textGroup[randomOrder[index]].text,
                     backgroundColor: 0xA37575, textSize: this.customState.textSize, rectBackground: true,
                     lastLineLength: this.customState.textGroup[randomOrder[index]].lastLineLength

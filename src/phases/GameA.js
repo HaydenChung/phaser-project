@@ -44,14 +44,14 @@ export default class GameA extends Phase{
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 2, y:this.world.height/8})
+        this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
         new GameA_Track({game: this.game, x:0, y: this.world.height/3*1})        
 
 
         this.sources.items = shuffle(this.sources.items)
         this.itemList = this.sources.items.map((source, index)=> {
             let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, text: textResort(source.name, 6), itemType: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
-            currItem.scale.setTo(1.2)
+            currItem.scale.setTo(1.3)
             this.customState.itemsDistance.push(Math.round(index* currItem.width))
             return currItem
         })
@@ -67,6 +67,7 @@ export default class GameA extends Phase{
         })
 
         this.baker = new Baker({game: this.game, x:this.world.width - targetMargin ,y: this.world.height, tagName:'麵包分發員', asset:'character_0'})
+        this.baker.scale.setTo(1.2)
 
         let breadTrain = this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 100000, Phaser.Easing.Linear.None, true)
 

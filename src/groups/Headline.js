@@ -27,7 +27,9 @@ export default class Headline extends Phaser.Group {
         }
 
         if(typeof gameName != 'undefined'){
-            this.add(new GameLogo({game: game, x:30*config.scaleRate, y:30*config.scaleRate, gameName:gameName}))
+            let gameLogo = new GameLogo({game: game, x:30*config.scaleRate, y:30*config.scaleRate, gameName:gameName})
+            gameLogo.reScale(.8)
+            this.add(gameLogo)
         }
 
     }
