@@ -10,8 +10,8 @@ gameASources.types = [
 gameASources.items = [
     {type:'說明文',name:'說明做運動的好處。'},
     {type:'說明文',name:'參加課外活動的好處。'},
-    {type:'說明文',name:'校園生活苦與樂。'},
-    {type:'說明文',name:'甚麼是中國語文。'},
+    {type:'說明文',name:'我的學習秘訣。'},
+    {type:'說明文',name:'甚麼是語文。'},
     {type:'記敘文',name:'一次失敗的經驗。'},
     {type:'記敘文',name:'旅遊迷途記。'},
     {type:'記敘文',name:'童年的一件悲慘經歷。'},
@@ -45,7 +45,7 @@ export let gameBSources = {
     sectionA:[],
     sectionB:{
         items:[
-            {index:'0',text:'Someting0'},
+            {index:'0',text:'狼狽的一天'},
             {index:'1',text:'Someting1'},
             {index:'2',text:'Someting2'},
             {index:'3',text:'Someting3'},
@@ -58,7 +58,7 @@ export let gameBSources = {
 
         ],
         targets:{
-            0:'Answer0',
+            0:'記述有一天上學沒帶雨傘卻遇上大雨的狼狽情形。',
             1:'Answer1',
             2:'Answer2',
             3:'Answer3',
@@ -75,26 +75,19 @@ export let gameBSources = {
             14:'Answer14',
             15:'Answer15',
             16:'Answer16',
-            17:'Answer17',
-            18:'Answer18',
-            19:'Answer19'
+            17:'抒情喜歡下雨天的情懷。',
+            18:'說明什麼是狼狽不堪。',
+            19:'描寫下雨天的街道景色。'
         }
-            // {index:'0',text:'Answer0'},
-            // {index:'1',text:'Answer1'},
-            // {index:'2',text:'Answer2'},
-            // {index:'3',text:'Answer3'},
-            // {index:'4',text:'Answer4'},
-            // {index:'5',text:'Answer5'},
-            // {index:'6',text:'Answer6'},
     }
 }
 
 export const gameCSources = [
-    {name:'groupB',title:'新黨經親文愛商說的家公',items:[
-        {type:'起',text:`是管突此著學黃元的能司在離場也得是。`},
-        {type:'承',text:`著細預隊形實呢出入兒直這，業金心想場求先。果口情，局北文中景不……遊前家想，建還可告下行一國沒證黨路如聽、口再步全。師據觀我。包影不寶著好過家心斯但性注顯究在期工已車？強眾海利無畫要。體年是往交長星嚴省要子常不們個史名有在濟識調。`},
-        {type:'轉',text:`然人非那的爭總、克廠但大漸那布存草務理麼國……的念生孩的成趣地以正子，沒整研眼三熱保了術公，五海平指語相於大失中指工手，來為的，了能財國夜一舉青般功房得際未；自張型金連呢界汽讀易你著能河法在心議自又小生課的讀高高分大一動記則源，輕相獎義裡心備人孩類術不度及出！世果有苦經男往口引門：看造有的叫在海一陽可你提了發覺三改，是天單要東龍水不等教他應心老，生心低年一。一親起取時，義樹亮，給職電。`},
-        {type:'合',text:`痛灣常是成帶。是連上，線極麼文，媽表花、也所口民的時上一？`}
+    {name:'groupB',title:'今天，是我的生日。',items:[
+        {type:'起',text:`今天，是我的生日。`},
+        {type:'承',text:`我放學後，發現家裡居然一個人也沒有。我心想，爸媽大概是因為工作太忙碌，而忘記了我的生日，所以我便傷心地回到房間做功課。做了一回，我就睡覺了。`},
+        {type:'轉',text:`醒來，已經是十點多。我走到客廳，突然看到桌上有一個鋪着雪白香甜的鮮奶油和一些餅乾粹的生日蛋糕。然後，爸媽就唱著生日快樂歌出現，還送我最喜歡的玩具車。他們給我的驚喜，真的讓我很感動。`},
+        {type:'合',text:`今年的生日，我和爸爸媽媽都感到十分愉快。`}
         ]},
     {name:'groupC',title:'山引兩包縣的河',items:[
         {type:'起',text:`麼人飛由資，景太臺初公青北軍感中；原計推許！成目式境要續業民年。`},

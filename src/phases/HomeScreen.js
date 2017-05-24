@@ -1,6 +1,8 @@
 import Phase from './Phase'
 import MenuButton from '../groups/MenuButton'
 import Character from '../sprites/Character'
+import MainLogo from '../sprites/MainLogo'
+import Headline from '../groups/Headline'
 
 export default class HomeScreen extends Phase {
     constructor({nextPhase, sources, gameList}){
@@ -12,6 +14,10 @@ export default class HomeScreen extends Phase {
     preload(){
         this.stage.backgroundColor = "#000000"
         const marginX = this.world.width/(this.gameList.length+1);
+
+        new Headline({game: this.game, x:0, y:0, showTitle:false})
+
+        this.game.world.add(new MainLogo({game: this.game, x: this.world.width/10*8, y: this.world.height/10*1}))
 
         this.gameList.forEach((game, index)=>{
             let tempChar = {}
