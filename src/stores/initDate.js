@@ -35,6 +35,10 @@ const topicBackupt = [
     {type:'說明文',name:'什麼是禮貎。'},
     {type:'說明文',name:'我心目中的理想校園。'},
     {type:'抒情文',name:'給未來的我。'},
+    {type:'抒情文',name:'欣賞日出日落。'},
+    {type:'抒情文',name:'青春是一首樂典。'},
+    {type:'議論文',name:'談冒險的精神。'},
+
 ]
 
 // let tempName = {}
