@@ -4,6 +4,7 @@ import config from '../config'
 import TextSentence from '../groups/TextSentence'
 import Baker from '../groups/Baker'
 import Headline from '../groups/Headline'
+import Countdown from '../groups/Countdown'
 
 import GameC_container from '../groups/GameC_container'
 
@@ -42,13 +43,6 @@ export default class GameC extends Phase{
 
     create(){
 
-        new Headline({game: this.game, x:0, y:0})
-
-        this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
-
         this.baker = new Baker({game: this.game, x:this.world.width/10, y:this.world.height, asset:'character_0', reversalBubble:true})
 
         this.targetContainer = new GameC_container({game: this.game, x:this.world.width/10*8, y:this.world.height/5})
@@ -81,6 +75,14 @@ export default class GameC extends Phase{
             this.targetContainer.children[this.targetContainer.children.length-1].y += this.targetContainer.children[this.targetContainer.children.length-1].height/2
         })
 
+        if(this.customState.groupIndex==0)new Countdown({game: this.game, x: this.world.centerX, y: this.world.centerY, seconds: 3})
+
+        new Headline({game: this.game, x:0, y:0})
+
+        this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
+        this.returnButton.scale.setTo(config.scaleRate)
+        this.returnButton.inputEnabled = true;
+        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
     }
 
     textResort(item){

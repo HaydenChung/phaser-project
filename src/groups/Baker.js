@@ -35,6 +35,12 @@ export default class Baker extends Phaser.Group{
         this.isRight.visible = false
         this.isWrong.visible = false
 
+        this.rightSound = game.add.audio('correctAnswer')
+        this.wrongSound = game.add.audio('wrongAnswer')
+
+
+        this.onDestroy.add(this.onDestroyHandler, this)
+        
         // if(reversalBubble === true){
         //     this.isRight.unEqualScale(-.7,.7)
         //     this.isWrong.unEqualScale(-.7,.7)
@@ -45,6 +51,7 @@ export default class Baker extends Phaser.Group{
 
     rightAnswer(){
         clearTimeout(this.timer)
+        this.rightSound.play()
         this.isWrong.visible = false
         this.isRight.visible = true
         this.timer = setTimeout(()=>this.isRight.visible = false, 1000)
@@ -52,8 +59,14 @@ export default class Baker extends Phaser.Group{
 
     wrongAnswer(){
         clearTimeout(this.timer)
+        this.wrongSound.play()
         this.isRight.visible = false
         this.isWrong.visible = true
         this.timer = setTimeout(()=>this.isWrong.visible = false, 1000)
+    }
+
+    onDestroyHandler(){
+        this.rightSound.destroy()
+        this.wrongSound.destroy()
     }
 }

@@ -34,14 +34,14 @@ export default class GameC_B extends GameC{
             this.targetContainer.add(
                 new TextSentence({
                     game: this.game, x: 0, y: textMargin, showText: false, type: item.type,
-                    text: item.text, backgroundColor: 0xA37575, rectBackground: true,
+                    text: item.text, backgroundColor: 0xf6f3e6, rectBackground: true,
                     textSize: this.customState.textSize, lastLineLength: item.lastLineLength
                 })
             )
             this.selectContainer.add(
                 new TextSentence({
                     game: this.game, x: 0, y: rtextMargin, type: this.customState.textGroup[randomOrder[index]].type,
-                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.onDropHandler},
+                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.itemDropHandler},
                     text: this.customState.textGroup[randomOrder[index]].text,
                     backgroundColor: 0xA37575, textSize: this.customState.textSize, rectBackground: true,
                     lastLineLength: this.customState.textGroup[randomOrder[index]].lastLineLength

@@ -6,8 +6,10 @@ import Headline from '../groups/Headline'
 import ReGroup from '../groups/ReGroup'
 import Baker from '../groups/Baker'
 import Scoreboard from '../groups/Scoreboard'
+import Countdown from '../groups/Countdown'
 
 import { mouseOverlap } from '../actions/collisionCheck'
+import { textResort } from '../actions/textManagement'
 import { shuffle } from '../functions'
 
 import config from '../config'
@@ -36,20 +38,20 @@ export default class GameB_sectionB extends Phase{
 
     create(){
 
-        new Headline({game: this.game, x:0, y:0})
+        this.targetContainer = new ReGroup(this.game, this.world.width/10*4, this.world.height/3)
+
+        this.baker = new Baker({game: this.game, x: this.world.width/10*9, y: this.world.height, tagName:'麵包切割主管', asset: 'character_0'})
 
         this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
+
+        new Countdown({game: this.game, x: this.world.centerX, y: this.world.centerY, seconds: 3, callback: this.newBread})
+
+        new Headline({game: this.game, x:0, y:0})
 
         this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
         this.returnButton.scale.setTo(config.scaleRate)
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
-
-        this.targetContainer = new ReGroup(this.game, this.world.width/10*4, this.world.height/3)
-
-        this.newBread()
-
-        this.baker = new Baker({game: this.game, x: this.world.width/10*9, y: this.world.height, tagName:'麵包切割主管', asset: 'character_0'})
 
     }
 
@@ -112,7 +114,7 @@ export default class GameB_sectionB extends Phase{
 
         randTargetArray.forEach((targetIndex)=>{
             this.targetContainer.add(
-                new Basket({game: this.game, x:this.customState.targetLocation[currChild].x*this.customState.targetMargin, y:this.customState.targetLocation[currChild].y*this.customState.targetMargin, matcherElm: targetIndex, displayElm:this.sources.targets[targetIndex]})
+                new Basket({game: this.game, x:this.customState.targetLocation[currChild].x*this.customState.targetMargin, y:this.customState.targetLocation[currChild].y*this.customState.targetMargin, matcherElm: targetIndex, displayElm: textResort(this.sources.targets[targetIndex], 7)})
             )
             currChild++
         })

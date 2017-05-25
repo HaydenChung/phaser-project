@@ -1,6 +1,8 @@
 import Phase from './Phase'
 import Basket from '../groups/Basket'
 import config from '../config'
+import TimeCounter from '../groups/Countdown'
+
 
 export default class GameC extends Phase{
     init(){
@@ -14,14 +16,16 @@ export default class GameC extends Phase{
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.itemList = []
+        this.timeCounter = new TimeCounter({game: this.game, x: this.game.world.centerX, y: this.game.world.centerY, seconds:5, fontSize:128})
 
-        this.sources.items.forEach((source, index)=>{
-            this.itemList.push(new Basket({game:this, x:10, y:index*20, typeName:source.name }))
-        })
+        // this.itemList = []
+
+        // this.sources.items.forEach((source, index)=>{
+        //     this.itemList.push(new Basket({game:this, x:10, y:index*20, typeName:source.name }))
+        // })
     }
 
     update(){
-        this.itemList.forEach((item)=> item.x += 5)
+        // this.itemList.forEach((item)=> item.x += 5)
     }
 }

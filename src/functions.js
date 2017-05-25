@@ -36,5 +36,7 @@ export function requestFullScreen(){
   var docEl = doc.documentElement;
 
   var request = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-  request.call(docEl);
+    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+      request.call(docEl);
+  }
 }

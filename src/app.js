@@ -35,6 +35,12 @@ class Game extends Phaser.Game {
             {type:'image',key:'mainLogo',url:config.httpRoot+'/assets/images/logos/main_logo.png'},
             {type:'image',key:'GameALogo',url:config.httpRoot+'/assets/images/logos/game_a_logo.png'},
             {type:'image',key:'backetBack',url:config.httpRoot+'/assets/images/backets/backet_back.png'},
+            {type:'audio',key:'buttonClick',url:config.httpRoot+'/assets/sounds/buttonclick.mp3'},
+            {type:'audio',key:'buttonHover',url:config.httpRoot+'/assets/sounds/buttonhover.mp3'},
+            {type:'audio',key:'bgMusic',url:config.httpRoot+'/assets/sounds/BgMusic.mp3'},
+            {type:'audio',key:'correctAnswer',url:config.httpRoot+'/assets/sounds/correct.mp3'},
+            {type:'audio',key:'wrongAnswer',url:config.httpRoot+'/assets/sounds/wrong.mp3'},
+            {type:'audio',key:'startGame',url:config.httpRoot+'/assets/sounds/StartGame.mp3'},
         ]
 
         for(let i=0;i<10;i++){

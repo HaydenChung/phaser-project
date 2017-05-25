@@ -19,5 +19,4 @@ export default class extends Phase {
             this.load[source.type](source.key,source.url)
         })
     }
-
 }
