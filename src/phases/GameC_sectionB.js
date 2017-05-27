@@ -20,7 +20,7 @@ export default class GameC_B extends GameC{
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.baker = new Baker({game: this.game, x:this.world.width/10, y:this.world.height, asset:'character_0', reversalBubble:true})
+        this.baker = new Baker({game: this.game, x:this.world.width/10, y:this.world.height, charIndex: 0, reversalBubble:true})
 
         this.targetContainer = new GameC_container({game: this.game, x:this.world.width/10*8, y:this.world.height/5})
         this.selectContainer = new GameC_container({game: this.game, x:this.world.width/10*4, y:this.world.height/5})
@@ -34,14 +34,14 @@ export default class GameC_B extends GameC{
             this.targetContainer.add(
                 new TextSentence({
                     game: this.game, x: 0, y: textMargin, showText: false, type: item.type,
-                    text: item.text, backgroundColor: 0xA37575, rectBackground: true,
+                    text: item.text, backgroundColor: 0xf6f3e6, rectBackground: true,
                     textSize: this.customState.textSize, lastLineLength: item.lastLineLength
                 })
             )
             this.selectContainer.add(
                 new TextSentence({
                     game: this.game, x: 0, y: rtextMargin, type: this.customState.textGroup[randomOrder[index]].type,
-                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.onDropHandler},
+                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.itemDropHandler},
                     text: this.customState.textGroup[randomOrder[index]].text,
                     backgroundColor: 0xA37575, textSize: this.customState.textSize, rectBackground: true,
                     lastLineLength: this.customState.textGroup[randomOrder[index]].lastLineLength

@@ -7,6 +7,7 @@ import Headline from '../groups/Headline'
 import GameA_Track from '../groups/GameA_Track'
 import GameA_Box from '../groups/GameA_Box'
 import Baker from '../groups/Baker'
+import Countdown from '../groups/Countdown'
 
 import Protal from '../sprites/Protal'
 import Character from '../sprites/Character'
@@ -33,24 +34,24 @@ export default class GameA extends Phase{
         this.bg.height = this.world.height
         this.bg.width = this.world.width
         this.itemDropHandler = this.itemDropHandler.bind(this)
+        this.countdownEnd = this.countdownEnd.bind(this)
+
     }
 
     create(){
 
-        new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
+        this.bgMusic = this.add.audio('bgMusic', .6, true).play()
 
-        this.returnButton = this.game.add.text(this.world.width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
-
-        this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
         new GameA_Track({game: this.game, x:0, y: this.world.height/3*1})        
 
+        const targetMargin = this.world.width/(this.sources.types.length+2);
+        this.targetList = this.sources.types.map((source, index)=>{
+            return new Basket({game: this.game, x: (index+1)* targetMargin, y: this.world.height-(140*config.scaleRate), matcherElm: source.name, displayElm: source.name})
+        })
 
         this.sources.items = shuffle(this.sources.items)
         this.itemList = this.sources.items.map((source, index)=> {
-            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, text: textResort(source.name, 6), itemType: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
+            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, displayElm: textResort(source.name, 6), matcherElm: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
             currItem.scale.setTo(1.3)
             this.customState.itemsDistance.push(Math.round(index* currItem.width))
             return currItem
@@ -59,25 +60,20 @@ export default class GameA extends Phase{
         this.customState.itemsCount = this.itemList.length
         this.customState.returnPoint = this.customState.itemsCount* this.itemList[0].width + this.world.width
 
+        this.baker = new Baker({game: this.game, x:this.world.width - targetMargin ,y: this.world.height, tagName:'麵包分發員', charIndex:0})
+        this.baker.scale.setTo(.9)
         new GameA_Box({game: this.game, x:0, y: this.world.height/3*1.01})
 
-        const targetMargin = this.world.width/(this.sources.types.length+2);
-        this.targetList = this.sources.types.map((source, index)=>{
-            return new Basket({game: this.game, x: (index+1)* targetMargin, y: this.world.height-(140*config.scaleRate), typeName: source.name})
-        })
+        this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
 
-        this.baker = new Baker({game: this.game, x:this.world.width - targetMargin ,y: this.world.height, tagName:'麵包分發員', asset:'character_0'})
-        this.baker.scale.setTo(1.2)
+        new Countdown({game: this.game, x: this.game.world.centerX, y: this.game.world.centerY, seconds: 3, callback: this.countdownEnd})
+        new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
 
-        let breadTrain = this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 100000, Phaser.Easing.Linear.None, true)
+        this.returnButton = this.game.add.text(this.world.width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
+        this.returnButton.scale.setTo(config.scaleRate)
+        this.returnButton.inputEnabled = true;
+        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        breadTrain.loop()
-        breadTrain.onLoop.add(()=>{
-            this.itemList = this.itemList.filter((item)=>{
-                return !item.customState.offTrack
-            })
-            this.customState.returnPoint = this.itemList.length* this.itemList[0].width + this.world.width
-        })
     }
 
     update(){
@@ -98,7 +94,7 @@ export default class GameA extends Phase{
                     collectedCountLimiter = true
                     this.customState.collectedCount += 1
                 }
-                if(target.customState.typeName == child.customState.itemType){
+                if(target.customState.matcherElm == child.customState.matcherElm){
                     target.addBread(child)
                     this.customState.gameMark += 1/(this.customState.itemsCount)
                     this.scoreboard.change(this.customState.gameMark)
@@ -114,5 +110,24 @@ export default class GameA extends Phase{
         }
         if(result === false) this.baker.wrongAnswer()
         return result;
+    }
+
+    countdownEnd(){
+
+        // this.game.world.bringToTop(this.baker)
+        
+        let breadTrain = this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 100000, Phaser.Easing.Linear.None, true)
+
+        breadTrain.loop()
+        breadTrain.onLoop.add(()=>{
+            this.itemList = this.itemList.filter((item)=>{
+                return !item.customState.offTrack
+            })
+            this.customState.returnPoint = this.itemList.length* this.itemList[0].width + this.world.width
+        })
+    }
+
+    shutdown(){
+        this.bgMusic.destroy(true)
     }
 }

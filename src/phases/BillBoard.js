@@ -3,7 +3,7 @@ import config from '../config'
 
 export default class BillBoard extends Phase{
 
-    init({score}){
+    init({score}={score:0}){
         this.sources.score = score
     }
     create(){

@@ -4,28 +4,32 @@ import config from '../config'
 import ReSprite from '../sprites/ReSprite'
 
 export default class Basket extends Phaser.Group{
-    constructor({game, x, y, typeName, spriteBlock}){
+    constructor({game, x, y, matcherElm, displayElm, spriteBlock}){
         super(game)
 
         this.customState = {
-            typeName: typeName
+            matcherElm,
+            displayElm
         }
 
         this.x = x;
         this.y = y;
 
-        this.spriteBlock = typeof spriteBlcok == 'undefined' ? this.add(new Backet({game: game, x:0, y:0})) : this.add(new spriteBlock({game: game, x:0, y:0}))
+        this.spriteBlock = typeof spriteBlock == 'undefined' ? this.add(new Backet({game: game, x:0, y:0})) : this.add(new spriteBlock({game: game, x:0, y:0}))
         this.spriteBlock.reScale(0.9)
+
 
         this.backetBackGroup = this.add(new Phaser.Group(this.game))
         this.backetBack = this.backetBackGroup.add(new ReSprite(this.backetBackGroup.game, 0, 0, 'backetBack'))
         this.backetBack.anchor.setTo(.5)
         this.backetBack.reScale(0.9)
 
+        if(typeof spriteBlock != 'undefined') this.backetBack.visible = false
+
         this.bringToTop(this.spriteBlock)
 
         this.textBlock = game.add.text(
-            0, 0, typeName,
+            0, 0, displayElm,
             { font: 'bold 40pt Arial', fill: '#4B3A2F', align:'center'}, this
         )
         this.textBlock.anchor.setTo(.5)

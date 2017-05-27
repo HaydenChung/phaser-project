@@ -16,6 +16,39 @@ export function shuffle(array) {
   return array;
 }
 
+export function customShuffle(array, outputLength, requestedIndex) {
+	var result = array.slice();
+
+	if(typeof requestedIndex != 'undefined'){
+  	var r = result.splice(requestedIndex,1)[0]
+  }
+
+  var m = result.length,
+  len = 0,
+  t, i;
+
+  // While there remain elements to shuffle…
+  while (outputLength>len) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = result[len];
+    result[len] = result[i];
+    result[i] = t;
+    len++
+  }
+
+	result.splice(len)
+
+	if(typeof requestedIndex != 'undefined'){
+  	result[Math.floor(Math.random()*len)] = r
+  }
+
+  return result;
+}
+
 export function toggleFullScreen() {
   var doc = window.document;
   var docEl = doc.documentElement;
@@ -36,5 +69,7 @@ export function requestFullScreen(){
   var docEl = doc.documentElement;
 
   var request = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-  request.call(docEl);
+    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+      request.call(docEl);
+  }
 }

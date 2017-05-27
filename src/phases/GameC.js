@@ -4,6 +4,7 @@ import config from '../config'
 import TextSentence from '../groups/TextSentence'
 import Baker from '../groups/Baker'
 import Headline from '../groups/Headline'
+import Countdown from '../groups/Countdown'
 
 import GameC_container from '../groups/GameC_container'
 
@@ -36,20 +37,13 @@ export default class GameC extends Phase{
         this.bg.width = this.world.width
 
         this.textResort = this.textResort.bind(this)
-        this.onDropHandler = this.onDropHandler.bind(this)
+        this.itemDropHandler = this.itemDropHandler.bind(this)
         this.swapSection = this.swapSection.bind(this)
     }
 
     create(){
 
-        new Headline({game: this.game, x:0, y:0})
-
-        this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
-
-        this.baker = new Baker({game: this.game, x:this.world.width/10, y:this.world.height, asset:'character_0', reversalBubble:true})
+        this.baker = new Baker({game: this.game, x:this.world.width/10, y:this.world.height, charIndex: 0, reversalBubble:true})
 
         this.targetContainer = new GameC_container({game: this.game, x:this.world.width/10*8, y:this.world.height/5})
         this.selectContainer = new GameC_container({game: this.game, x:this.world.width/10*4, y:this.world.height/5})
@@ -69,7 +63,7 @@ export default class GameC extends Phase{
             this.selectContainer.add(
                 new TextSentence({
                     game: this.game, x: 0, y: rtextMargin, type: this.customState.textGroup[randomOrder[index]].type,
-                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.onDropHandler},
+                    draggable: true, actions:{mouseOverlap}, parentCallback:{itemDropHandler:this.itemDropHandler},
                     text: this.customState.textGroup[randomOrder[index]].text,
                     backgroundColor: 0xA37575, textSize: this.customState.textSize,
                     lastLineLength: this.customState.textGroup[randomOrder[index]].lastLineLength
@@ -81,6 +75,14 @@ export default class GameC extends Phase{
             this.targetContainer.children[this.targetContainer.children.length-1].y += this.targetContainer.children[this.targetContainer.children.length-1].height/2
         })
 
+        if(this.customState.groupIndex==0)new Countdown({game: this.game, x: this.world.centerX, y: this.world.centerY, seconds: 3})
+
+        new Headline({game: this.game, x:0, y:0})
+
+        this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
+        this.returnButton.scale.setTo(config.scaleRate)
+        this.returnButton.inputEnabled = true;
+        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
     }
 
     textResort(item){
@@ -98,7 +100,7 @@ export default class GameC extends Phase{
         return {type:item.type ,text, lastLineLength}
     }
 
-    onDropHandler(child){
+    itemDropHandler(child){
         let result = null;
         let collectedCountLimiter = false;
 

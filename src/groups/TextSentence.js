@@ -11,7 +11,7 @@ export default class TextSentence extends ReGroup {
 
         this.customState = {
             style: { font: 'normal LiHei Pro Medium,Microsoft JhengHei',  fontSize: textSize, fill: '#000000', align:'left', tabs: [textSize*2, 0]},
-            typeStyle: { font: 'normal LiHei Pro Medium,Microsoft JhengHei',  fontSize: textSize*2, fill: '#FFFFFF', align:'left'},
+            typeStyle: { font: 'normal LiHei Pro Medium,Microsoft JhengHei',  fontSize: textSize, fill: '#008000', align:'left'},
             dragging: false,
             offTrack: false,
             parentCallback,
@@ -44,7 +44,7 @@ export default class TextSentence extends ReGroup {
             this.sentence.events.onInputOut.add(this.inputOutHandler, this)
         }
 
-        let graphics = game.add.graphics(gPosX, gPosY)
+        let graphics = game.add.graphics(gPosX, gPosY, this)
             if(rectBackground == false){
             graphics.lineStyle(0)
             graphics.beginFill(backgroundColor, 1)
@@ -61,8 +61,6 @@ export default class TextSentence extends ReGroup {
             graphics.beginFill(backgroundColor, 1)
             graphics.drawRect(0, 0, this.sentence.width, this.sentence.height)
         }
-
-        this.add(graphics)
 
         this.backgroundField = graphics
         
