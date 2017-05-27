@@ -7,7 +7,7 @@ export default class Countdown extends ReGroup{
 
         this.customState = {
             callback:callback||(()=>{}),
-            fontSize:fontSize|| game.world.height,
+            fontSize:fontSize|| game.world.height/2,
             backgroundColor:backgroundColor||'black'
         }
 

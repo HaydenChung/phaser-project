@@ -31,16 +31,22 @@ class Game extends Phaser.Game {
             {type:'image',key:'begin',url:config.httpRoot+'/assets/images/begin.png'},
             {type:'image',key:'protal',url:config.httpRoot+'/assets/images/protal.png'},
             {type:'image',key:'bg_1_3',url:config.httpRoot+'/assets/images/backgrounds/bg_1_3.png'},
-            {type:'image',key:'character_0',url:config.httpRoot+'/assets/images/characters/character_0.png'},
+            {type:'image',key:'gameBBg',url:config.httpRoot+'/assets/images/backgrounds/game_1.png'},
             {type:'image',key:'mainLogo',url:config.httpRoot+'/assets/images/logos/main_logo.png'},
             {type:'image',key:'GameALogo',url:config.httpRoot+'/assets/images/logos/game_a_logo.png'},
+            {type:'image',key:'GameBLogo',url:config.httpRoot+'/assets/images/logos/game_logo_1.png'},
+            {type:'image',key:'GameBLabel',url:config.httpRoot+'/assets/images/logos/game_label_1.png'},
             {type:'image',key:'backetBack',url:config.httpRoot+'/assets/images/backets/backet_back.png'},
+            {type:'image',key:'gameB_shelf',url:config.httpRoot+'/assets/images/shelfs/shelf_0.png'},
+            {type:'image',key:'backetOfBreads',url:config.httpRoot+'/assets/images/misc/backet_of_breads.png'},
+
             {type:'audio',key:'buttonClick',url:config.httpRoot+'/assets/sounds/buttonclick.mp3'},
             {type:'audio',key:'buttonHover',url:config.httpRoot+'/assets/sounds/buttonhover.mp3'},
             {type:'audio',key:'bgMusic',url:config.httpRoot+'/assets/sounds/BgMusic.mp3'},
             {type:'audio',key:'correctAnswer',url:config.httpRoot+'/assets/sounds/correct.mp3'},
             {type:'audio',key:'wrongAnswer',url:config.httpRoot+'/assets/sounds/wrong.mp3'},
             {type:'audio',key:'startGame',url:config.httpRoot+'/assets/sounds/StartGame.mp3'},
+
         ]
 
         for(let i=0;i<10;i++){
@@ -53,7 +59,7 @@ class Game extends Phaser.Game {
                 type:'image',key:`backet_${i}`,url:config.httpRoot+`/assets/images/backets/backet_${i}.png`
             })
         }
-        for(let i=0;i<6;i++){
+        for(let i=0;i<11;i++){
             logoSource.push({
                 type:'image',key:`belt_${i}`,url:config.httpRoot+`/assets/images/belts/belt_${i}.png`
             })
@@ -64,6 +70,24 @@ class Game extends Phaser.Game {
                 type:'image',key:`bubble_${i}`,url:config.httpRoot+`/assets/images/bubbles/Game1_bubble_${i}.png`
             })
         }
+
+        for(let i=0;i<4;i++){
+            logoSource.push({
+                type:'image',key:`plasticBox_${i}`,url:config.httpRoot+`/assets/images/plastic_boxs/plasticbox_${i}.png`
+            })
+        }
+
+        for(let i=0;i<2;i++){
+            logoSource.push({
+                type:'image',key:`character_${i}`,url:config.httpRoot+`/assets/images/characters/character_${i}.png`
+            })
+            for(let j=0;j<3;j++){
+                logoSource.push({
+                    type:'image',key:`face_${i}_${j}`,url:config.httpRoot+`/assets/images/characters/face_${i}_${j}.png`
+                })
+            }
+        }
+
 
         const gameList = [
             {name:'Game A',phase:'GameA'},
@@ -77,7 +101,7 @@ class Game extends Phaser.Game {
         const randGameCSources = shuffle(gameCSources)
 
         this.state.add('Boot',new Boot({nextPhase:'LogoLoading'}))
-        this.state.add('LogoLoading',new Loading({nextPhase:'Logo',sources:logoSource}))
+        this.state.add('LogoLoading',new Loading({nextPhase:'HomeScreen',sources:logoSource}))
         this.state.add('Logo',new Logo({nextPhase:'HomeScreen'}))
         this.state.add('HomeScreen',new HomeScreen({nextPhase:'GameState',gameList}))
         this.state.add('GameA',new GameA({nextPhase:'BillBoard',sources:gameASources}))

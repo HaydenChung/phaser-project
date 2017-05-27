@@ -10,6 +10,7 @@ export default class ReSprite extends Phaser.Sprite {
 
     reScale(inputRate){
         this.scale.setTo(config.scaleRate*inputRate)
+        return this
     }
 
     unEqualScale(x, y){

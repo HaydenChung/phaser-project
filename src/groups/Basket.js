@@ -15,13 +15,16 @@ export default class Basket extends Phaser.Group{
         this.x = x;
         this.y = y;
 
-        this.spriteBlock = typeof spriteBlcok == 'undefined' ? this.add(new Backet({game: game, x:0, y:0})) : this.add(new spriteBlock({game: game, x:0, y:0}))
+        this.spriteBlock = typeof spriteBlock == 'undefined' ? this.add(new Backet({game: game, x:0, y:0})) : this.add(new spriteBlock({game: game, x:0, y:0}))
         this.spriteBlock.reScale(0.9)
+
 
         this.backetBackGroup = this.add(new Phaser.Group(this.game))
         this.backetBack = this.backetBackGroup.add(new ReSprite(this.backetBackGroup.game, 0, 0, 'backetBack'))
         this.backetBack.anchor.setTo(.5)
         this.backetBack.reScale(0.9)
+
+        if(typeof spriteBlock != 'undefined') this.backetBack.visible = false
 
         this.bringToTop(this.spriteBlock)
 

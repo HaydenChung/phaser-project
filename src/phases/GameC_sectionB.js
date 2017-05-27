@@ -20,7 +20,7 @@ export default class GameC_B extends GameC{
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
 
-        this.baker = new Baker({game: this.game, x:this.world.width/10, y:this.world.height, asset:'character_0', reversalBubble:true})
+        this.baker = new Baker({game: this.game, x:this.world.width/10, y:this.world.height, charIndex: 0, reversalBubble:true})
 
         this.targetContainer = new GameC_container({game: this.game, x:this.world.width/10*8, y:this.world.height/5})
         this.selectContainer = new GameC_container({game: this.game, x:this.world.width/10*4, y:this.world.height/5})

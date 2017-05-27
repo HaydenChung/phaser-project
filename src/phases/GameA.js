@@ -34,7 +34,7 @@ export default class GameA extends Phase{
         this.bg.height = this.world.height
         this.bg.width = this.world.width
         this.itemDropHandler = this.itemDropHandler.bind(this)
-        this.startBreadTrain = this.startBreadTrain.bind(this)
+        this.countdownEnd = this.countdownEnd.bind(this)
 
     }
 
@@ -60,14 +60,13 @@ export default class GameA extends Phase{
         this.customState.itemsCount = this.itemList.length
         this.customState.returnPoint = this.customState.itemsCount* this.itemList[0].width + this.world.width
 
+        this.baker = new Baker({game: this.game, x:this.world.width - targetMargin ,y: this.world.height, tagName:'麵包分發員', charIndex:0})
+        this.baker.scale.setTo(.9)
         new GameA_Box({game: this.game, x:0, y: this.world.height/3*1.01})
-
-        this.baker = new Baker({game: this.game, x:this.world.width - targetMargin ,y: this.world.height, tagName:'麵包分發員', asset:'character_0'})
-        this.baker.scale.setTo(1.2)
 
         this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
 
-        new Countdown({game: this.game, x: this.game.world.centerX, y: this.game.world.centerY, seconds: 3, callback: this.startBreadTrain})
+        new Countdown({game: this.game, x: this.game.world.centerX, y: this.game.world.centerY, seconds: 3, callback: this.countdownEnd})
         new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
 
         this.returnButton = this.game.add.text(this.world.width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
@@ -113,7 +112,10 @@ export default class GameA extends Phase{
         return result;
     }
 
-    startBreadTrain(){
+    countdownEnd(){
+
+        // this.game.world.bringToTop(this.baker)
+        
         let breadTrain = this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 100000, Phaser.Easing.Linear.None, true)
 
         breadTrain.loop()
