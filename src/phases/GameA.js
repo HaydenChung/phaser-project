@@ -34,7 +34,7 @@ export default class GameA extends Phase{
         this.bg.height = this.world.height
         this.bg.width = this.world.width
         this.itemDropHandler = this.itemDropHandler.bind(this)
-        this.countdownEnd = this.countdownEnd.bind(this)
+        this.breadTrain = this.breadTrain.bind(this)
 
     }
 
@@ -66,7 +66,7 @@ export default class GameA extends Phase{
 
         this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
 
-        new Countdown({game: this.game, x: this.game.world.centerX, y: this.game.world.centerY, seconds: 3, callback: this.countdownEnd})
+        new Countdown({game: this.game, x: this.game.world.centerX, y: this.game.world.centerY, seconds: 3, callback: this.breadTrain})
         new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
 
         this.returnButton = this.game.add.text(this.world.width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
@@ -112,18 +112,15 @@ export default class GameA extends Phase{
         return result;
     }
 
-    countdownEnd(){
-
-        // this.game.world.bringToTop(this.baker)
-        
-        let breadTrain = this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 100000, Phaser.Easing.Linear.None, true)
-
-        breadTrain.loop()
-        breadTrain.onLoop.add(()=>{
+    breadTrain(){
+        this.add.tween(this.customState).to({leadingPosX:this.customState.returnPoint}, 12.5*this.customState.returnPoint/config.scaleRate, Phaser.Easing.Linear.None, true)
+        .onComplete.add(()=>{
             this.itemList = this.itemList.filter((item)=>{
                 return !item.customState.offTrack
             })
             this.customState.returnPoint = this.itemList.length* this.itemList[0].width + this.world.width
+            this.customState.leadingPosX = 0
+            this.breadTrain()
         })
     }
 
