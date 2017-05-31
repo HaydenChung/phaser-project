@@ -8,6 +8,7 @@ import Boot from './phases/Boot'
 import Loading from './phases/Loading'
 import Logo from './phases/Logo'
 import HomeScreen from './phases/HomeScreen'
+import GameABriefing from './phases/GameABriefing'
 import GameA from './phases/GameA'
 import GameB_sectionB from './phases/GameB_sectionB'
 import GameC from './phases/GameC'
@@ -39,6 +40,7 @@ class Game extends Phaser.Game {
             {type:'image',key:'backetBack',url:config.httpRoot+'/assets/images/backets/backet_back.png'},
             {type:'image',key:'gameB_shelf',url:config.httpRoot+'/assets/images/shelfs/shelf_0.png'},
             {type:'image',key:'backetOfBreads',url:config.httpRoot+'/assets/images/misc/backet_of_breads.png'},
+            {type:'image',key:'hands',url:config.httpRoot+'/assets/images/characters/hands_0.png'},
 
             {type:'audio',key:'buttonClick',url:config.httpRoot+'/assets/sounds/buttonclick.mp3'},
             {type:'audio',key:'buttonHover',url:config.httpRoot+'/assets/sounds/buttonhover.mp3'},
@@ -47,6 +49,7 @@ class Game extends Phaser.Game {
             {type:'audio',key:'wrongAnswer',url:config.httpRoot+'/assets/sounds/wrong.mp3'},
             {type:'audio',key:'startGame',url:config.httpRoot+'/assets/sounds/StartGame.mp3'},
 
+            {type:'json',key:'gameASources',url:config.httpRoot+'/src/stores/gameASources.json'}
         ]
 
         for(let i=0;i<10;i++){
@@ -90,11 +93,11 @@ class Game extends Phaser.Game {
 
 
         const gameList = [
-            {name:'Game A',phase:'GameA'},
+            {name:'Game A',phase:'GameABriefing'},
             {name:'Game B',phase:'GameB'},
             {name:'Game C',phase:'GameC'},
             {name:'Game D',phase:'GameD'},
-            {name:'Game E',phase:'GameState'}
+            {name:'Game E',phase:'GameABriefing'}
         ]
 
         //Game C need to shuffle at app.js as both section need the same sources
@@ -104,6 +107,7 @@ class Game extends Phaser.Game {
         this.state.add('LogoLoading',new Loading({nextPhase:'HomeScreen',sources:logoSource}))
         this.state.add('Logo',new Logo({nextPhase:'HomeScreen'}))
         this.state.add('HomeScreen',new HomeScreen({nextPhase:'GameState',gameList}))
+        this.state.add('GameABriefing',new GameABriefing({nextPhase:'GameA',sources:gameASources}))        
         this.state.add('GameA',new GameA({nextPhase:'BillBoard',sources:gameASources}))
         this.state.add('GameB',new GameB_sectionB({nextPhase:'BillBoard',sources:gameBSources.sectionB}))
         this.state.add('GameC',new GameC({nextPhase:'GameC_sectionB',sources:randGameCSources}))
@@ -155,9 +159,11 @@ class Game extends Phaser.Game {
             wannaWidth = wannaWidth * scaleRate
             wannaHeight = parentHeight
         }
-        config.wannaWidth= Math.round(wannaWidth)
-        config.wannaHeight= Math.round(wannaHeight)
-        config.scaleRate= scaleRate.toFixed(5)
+        config.wannaWidth = Math.round(wannaWidth)
+        config.wannaHeight = Math.round(wannaHeight)
+        config.scaleRate = scaleRate.toFixed(5)
+        config.widthGrid = config.wannaWidth/10
+        config.heightGrid = config.wanaHeight/10
 
         this.scale.setGameSize(config.wannaWidth, config.wannaHeight);
 

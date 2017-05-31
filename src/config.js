@@ -22,7 +22,9 @@ let config = {
     httpRoot: window.location.href,
     wannaWidth: Math.round(wannaWidth),
     wannaHeight: Math.round(wannaHeight),
-    scaleRate: scaleRate.toFixed(5)
+    scaleRate: scaleRate.toFixed(5),
+    widthGrid: wannaWidth/10,
+    heightGrid: wannaHeight/10
 }
 
 export default config

@@ -11,7 +11,7 @@ import GameB_container from '../groups/GameB_Container'
 import PlasticBox from '../sprites/PlasticBox'
 import GameB_Track from '../groups/GameB_Track'
 import ReSprite from '../sprites/ReSprite'
-
+import Title from '../groups/Title'
 
 import { mouseOverlap } from '../actions/collisionCheck'
 import { textResort } from '../actions/textManagement'
@@ -24,7 +24,7 @@ export default class GameB_sectionB extends Phase{
     preload(){
 
         this.customState = {
-            targetMargin: this.world.width/4,
+            targetMargin: config.widthGrid*2.5,
             targetLocation: [{x:0,y:0},{x:1,y:0},{x:0,y:.6},{x:1,y:.6}],
             groupIndex: 0,
             gameMark: 0,
@@ -44,22 +44,23 @@ export default class GameB_sectionB extends Phase{
 
     create(){
 
-        this.shelf = new GameB_container({game:this.game, x:this.world.width/10*2.5, y:this.world.height/10*4})
+        this.shelf = new GameB_container({game:this.game, x:config.widthGrid*2.5, y:config.heightGrid*4})
         this.targetContainer = new ReGroup(this.game, this.shelf.width/3.5, 0)
 
         this.shelf.add(this.targetContainer)
         this.shelf.scale.setTo(1.2)
 
-        this.machine = new GameB_Track({game: this.game, x:0, y:this.world.height/10*6})
+        this.machine = new GameB_Track({game: this.game, x:0, y:config.heightGrid*6})
         this.machine.scale.setTo(.9)
 
-        this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
+        this.title = new Title({game: this.game, x:config.widthGrid * 3, y:config.heightGrid*1.2, text:"麵包包裝工場", colorHex:'0172bd'})
+        this.scoreboard = new Scoreboard({game: this.game, x:config.widthGrid * 8, y:config.heightGrid*1.2})
 
         this.backetOfBreads = this.game.add.existing(new ReSprite(this.game, 0, this.world.height, 'backetOfBreads'))
         this.backetOfBreads.anchor.setTo(.2, .8)
         this.backetOfBreads.reScale(1.1)
 
-        this.baker = new Baker({game: this.game, x: this.world.width/10*9.5, y: this.world.height, tagName:'麵包切割主管', charIndex: 1})
+        this.baker = new Baker({game: this.game, x: config.widthGrid*9.5, y: this.world.height, tagName:'麵包切割主管', charIndex: 1})
         this.baker.scale.setTo(.9)
 
         new Countdown({game: this.game, x: this.world.centerX, y: this.world.centerY, seconds: 3, callback: this.countdownEnd})

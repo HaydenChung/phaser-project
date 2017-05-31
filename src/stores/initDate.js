@@ -1,3 +1,7 @@
+import Phaser from 'phaser'
+import gameA_JSON from './gameASources.json'
+
+
 export let gameASources = {items:[], types:[]};
 gameASources.types = [
     {name:'議論文'},
@@ -7,39 +11,40 @@ gameASources.types = [
     {name:'記敘文'},
 ]
 
-gameASources.items = [
-    {type:'說明文',name:'說明做運動的好處。'},
-    {type:'說明文',name:'參加課外活動的好處。'},
-    {type:'說明文',name:'我的學習秘訣。'},
-    {type:'說明文',name:'甚樣摺紙鶴。'},
-    {type:'記敘文',name:'一次失敗的經驗。'},
-    {type:'記敘文',name:'旅遊迷途記。'},
-    {type:'記敘文',name:'童年的一件悲慘經歷。'},
-    {type:'記敘文',name:'難忘的學校旅行。'},
-    {type:'抒情文',name:'畢業有感。'},
-    {type:'抒情文',name:'再見了，我的小貓。'},
-    {type:'抒情文',name:'給未來的我。'},
-    {type:'抒情文',name:'熱愛青春。'},
-    {type:'議論文',name:'論應如何安排作息時間。'},
-    {type:'議論文',name:'怎樣才算是一個好學生？'},
-    {type:'議論文',name:'小學生應否有零用錢？'},
-    {type:'議論文',name:'談中學生應否談戀愛。'},
-    {type:'描寫文',name:'大雨中的鬧市景象。'},
-    {type:'描寫文',name:'一場暴雨。'},
-    {type:'描寫文',name:'我的媽媽。'},
-    {type:'描寫文',name:'我最尊敬的老師。'},
-]
+gameASources.items = gameA_JSON
+// [
+//     {type:'說明文',name:'說明做運動的好處。'},
+//     {type:'說明文',name:'參加課外活動的好處。'},
+//     {type:'說明文',name:'我的學習秘訣。'},
+//     {type:'說明文',name:'甚樣摺紙鶴。'},
+//     {type:'記敘文',name:'一次失敗的經驗。'},
+//     {type:'記敘文',name:'旅遊迷途記。'},
+//     {type:'記敘文',name:'童年的一件悲慘經歷。'},
+//     {type:'記敘文',name:'難忘的學校旅行。'},
+//     {type:'抒情文',name:'畢業有感。'},
+//     {type:'抒情文',name:'再見了，我的小貓。'},
+//     {type:'抒情文',name:'給未來的我。'},
+//     {type:'抒情文',name:'熱愛青春。'},
+//     {type:'議論文',name:'論應如何安排作息時間。'},
+//     {type:'議論文',name:'怎樣才算是一個好學生？'},
+//     {type:'議論文',name:'小學生應否有零用錢？'},
+//     {type:'議論文',name:'談中學生應否談戀愛。'},
+//     {type:'描寫文',name:'大雨中的鬧市景象。'},
+//     {type:'描寫文',name:'一場暴雨。'},
+//     {type:'描寫文',name:'我的媽媽。'},
+//     {type:'描寫文',name:'我最尊敬的老師。'},
+// ]
 
-const topicBackupt = [
-    {type:'說明文',name:'我心目中的理想校園。'},
-    {type:'抒情文',name:'青春是一首樂曲。'},
-    {type:'議論文',name:'談冒險的精神。'},
-    {type:'記敘文',name:'最倒楣的一天。'},
-    {type:'記敘文',name:'記一次獲獎的經過。'},
-    {type:'記敘文',name:'旅行記趣。'},
-    {type:'記敘文',name:'記一次學校運動會。'},
-    {type:'記敘文',name:'驚險的一天。'},
-]
+// const topicBackupt = [
+//     {type:'說明文',name:'我心目中的理想校園。'},
+//     {type:'抒情文',name:'青春是一首樂曲。'},
+//     {type:'議論文',name:'談冒險的精神。'},
+//     {type:'記敘文',name:'最倒楣的一天。'},
+//     {type:'記敘文',name:'記一次獲獎的經過。'},
+//     {type:'記敘文',name:'旅行記趣。'},
+//     {type:'記敘文',name:'記一次學校運動會。'},
+//     {type:'記敘文',name:'驚險的一天。'},
+// ]
 
 export let gameBSources = {
     sectionA:[],
