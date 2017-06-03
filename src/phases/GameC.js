@@ -5,6 +5,7 @@ import TextSentence from '../groups/TextSentence'
 import Baker from '../groups/Baker'
 import Headline from '../groups/Headline'
 import Countdown from '../groups/Countdown'
+import Title from '../groups/Title'
 
 import GameC_container from '../groups/GameC_container'
 
@@ -43,10 +44,10 @@ export default class GameC extends Phase{
 
     create(){
 
-        this.baker = new Baker({game: this.game, x:this.world.width/10, y:this.world.height, charIndex: 0, reversalBubble:true})
+        this.baker = new Baker({game: this.game, x:config.widthGrid, y:this.world.height, charIndex: 0, reversalBubble:true})
 
-        this.targetContainer = new GameC_container({game: this.game, x:this.world.width/10*8, y:this.world.height/5})
-        this.selectContainer = new GameC_container({game: this.game, x:this.world.width/10*4, y:this.world.height/5})
+        this.targetContainer = new GameC_container({game: this.game, x:config.widthGrid*8, y:this.world.height/5})
+        this.selectContainer = new GameC_container({game: this.game, x:config.widthGrid*4, y:this.world.height/5})
 
         let textMargin = 0,
         rtextMargin = 0
@@ -74,6 +75,8 @@ export default class GameC extends Phase{
             this.selectContainer.children[this.selectContainer.children.length-1].y += this.selectContainer.children[this.selectContainer.children.length-1].height/2
             this.targetContainer.children[this.targetContainer.children.length-1].y += this.targetContainer.children[this.targetContainer.children.length-1].height/2
         })
+
+        this.title = new Title({game: this.game, x:config.widthGrid * 3, y:config.heightGrid*1.2, text:"麵包貨倉", colorHex: "0172bd"})
 
         if(this.customState.groupIndex==0)new Countdown({game: this.game, x: this.world.centerX, y: this.world.centerY, seconds: 3})
 

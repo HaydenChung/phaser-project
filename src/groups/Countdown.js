@@ -19,9 +19,9 @@ export default class Countdown extends ReGroup{
         graphics.drawRect(0, 0, game.world.width, game.world.height)
         graphics.inputEnabled = true;
 
-        this.strokeText = this.game.add.text(0, 0, seconds, {font:`${this.customState.fontSize}px Arial Black`, fill:"#c51b7d"}, this)
-        this.strokeText.stroke = "#de77ae"
-        this.strokeText.strokeThickness = 16
+        this.strokeText = this.game.add.text(0, 0, seconds, {font:`${this.customState.fontSize}px LiHei Pro Medium,Microsoft JhengHei Black`, fill:"#4B3A2F"}, this)
+        this.strokeText.stroke = "#ffffff"
+        this.strokeText.strokeThickness = 58
         this.strokeText.setShadow(2, 2, "#333333", 2, true, true)
         this.strokeText.anchor.setTo(.5)
         this.strokeText.scale.setTo(config.scaleRate)
@@ -33,19 +33,26 @@ export default class Countdown extends ReGroup{
         this.timer.loop(1000, this.updateText, this)
         this.timer.start()
 
+        this.game.add.tween(this.strokeText.scale).to({x:.5*config.scaleRate,y:.5*config.scaleRate}, 1000, Phaser.Easing.Linear.none, true)
+
         this.onDestroyHandler = this.onDestroyHandler.bind(this)
 
         this.onDestroy.add(this.onDestroyHandler, this)
     }
 
     updateText(){
+        this.strokeText.scale.setTo(config.scaleRate)
         if(!--this.strokeText.text){
+            this.strokeText.text = '開始'
             this.startSound.play()
             this.timer.stop(true)
-            this.customState.callback()
-            setTimeout(this.destroy.bind(this),200)
+            setTimeout(()=>{
+                this.customState.callback()
+                this.destroy()
+            },1000)
             return
         }
+        this.game.add.tween(this.strokeText.scale).to({x:.5*config.scaleRate,y:.5*config.scaleRate}, 1000, Phaser.Easing.Linear.none, true)
         this.countSound.play()
     }
 

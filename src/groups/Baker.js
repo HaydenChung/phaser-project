@@ -24,7 +24,7 @@ export default class Baker extends Phaser.Group{
         this.character = this.add(new Character({game, x:0, y:0, charIndex}))
         this.character.reScale(1.1)
 
-        this.bread = this.add(new Bread({game, x: 0, y: -450*config.scaleRate}))
+        this.bread = this.add(new Bread({game, x: 0, y: -470*config.scaleRate}))
         this.bread.anchor.setTo(.5)
         this.bread.reScale(1.1)
 
@@ -35,6 +35,8 @@ export default class Baker extends Phaser.Group{
         )
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)
+
+        this.hands = this.add(new ReSprite(game, 0, -420*config.scaleRate, 'hands')).anchor.setTo(.5)
 
         let bubbleLocation = reversalBubble === true ? this.character.width/2 : 0 ;
 

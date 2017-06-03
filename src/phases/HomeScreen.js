@@ -3,6 +3,7 @@ import MenuButton from '../groups/MenuButton'
 import Character from '../sprites/Character'
 import MainLogo from '../sprites/MainLogo'
 import Headline from '../groups/Headline'
+import config from '../config'
 
 export default class HomeScreen extends Phase {
     constructor({nextPhase, sources, gameList}){
@@ -20,7 +21,7 @@ export default class HomeScreen extends Phase {
 
         new Headline({game: this.game, x:0, y:0, showTitle:false})
 
-        this.game.world.add(new MainLogo({game: this.game, x: this.world.width/10*8, y: this.world.height/10*1}))
+        this.game.world.add(new MainLogo({game: this.game, x: config.widthGrid*8, y: config.heightGrid*1}))
 
         this.gameList.forEach((game, index)=>{
             let tempChar = {}

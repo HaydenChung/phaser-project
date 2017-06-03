@@ -8,6 +8,7 @@ import GameA_Track from '../groups/GameA_Track'
 import GameA_Box from '../groups/GameA_Box'
 import Baker from '../groups/Baker'
 import Countdown from '../groups/Countdown'
+import Title from '../groups/Title'
 
 import Protal from '../sprites/Protal'
 import Character from '../sprites/Character'
@@ -18,8 +19,7 @@ import { mouseOverlap } from '../actions/collisionCheck'
 import { textResort } from '../actions/textManagement'
 
 export default class GameA extends Phase{
-    preload(){
-
+    init({groupIndex}){
         this.customState = {
             collectedCount: 0,
             leadingPosX: 0,
@@ -27,8 +27,12 @@ export default class GameA extends Phase{
             gameMark: 0,
             returnPoint: 0,
             itemsCount: 0,
-            itemsDistance: []
+            itemsDistance: [],
+            groupIndex: groupIndex|0
         }
+    }
+
+    preload(){
 
         this.bg = this.game.add.sprite(0, 0, 'bg_1_3')
         this.bg.height = this.world.height
@@ -49,8 +53,8 @@ export default class GameA extends Phase{
             return new Basket({game: this.game, x: (index+1)* targetMargin, y: this.world.height-(140*config.scaleRate), matcherElm: source.name, displayElm: source.name})
         })
 
-        this.sources.items = shuffle(this.sources.items)
-        this.itemList = this.sources.items.map((source, index)=> {
+        this.sources.items[this.customState.groupIndex] = shuffle(this.sources.items[this.customState.groupIndex])
+        this.itemList = this.sources.items[this.customState.groupIndex].map((source, index)=> {
             let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, displayElm: textResort(source.name, 6), matcherElm: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
             currItem.scale.setTo(1.3)
             this.customState.itemsDistance.push(Math.round(index* currItem.width))
@@ -64,12 +68,13 @@ export default class GameA extends Phase{
         this.baker.scale.setTo(.9)
         new GameA_Box({game: this.game, x:0, y: this.world.height/3*1.01})
 
-        this.scoreboard = new Scoreboard({game: this.game, x:this.world.width/10 * 3, y:this.world.height/8})
+        this.scoreboard = new Scoreboard({game: this.game, x:config.widthGrid * 7, y:this.world.height/8})
+        this.title = new Title({game: this.game, x:config.widthGrid * 3, y:config.heightGrid*1.2, text:"麵包配送中心", colorHex: "f7941f"})
 
         new Countdown({game: this.game, x: this.game.world.centerX, y: this.game.world.centerY, seconds: 3, callback: this.breadTrain})
         new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
 
-        this.returnButton = this.game.add.text(this.world.width/10 * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
+        this.returnButton = this.game.add.text(config.widthGrid * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
         this.returnButton.scale.setTo(config.scaleRate)
         this.returnButton.inputEnabled = true;
         this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
