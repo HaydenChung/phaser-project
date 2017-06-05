@@ -4,6 +4,8 @@ import config from '../config'
 import TextSentence from '../groups/TextSentence'
 import Baker from '../groups/Baker'
 import Headline from '../groups/Headline'
+import Title from '../groups/Title'
+import ReturnButton from '../groups/ReturnButton'
 
 import GameC_container from '../groups/GameC_container'
 
@@ -16,10 +18,7 @@ export default class GameC_B extends GameC{
         new Headline({game: this.game, x:0, y:0})
         this.title = new Title({game: this.game, x:config.widthGrid * 3, y:config.heightGrid*1.2, text:"麵包貨倉", colorHex: "0172bd"})
 
-        this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
+        new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
 
         this.baker = new Baker({game: this.game, x:config.widthGrid, y:this.world.height, charIndex: 0, reversalBubble:true})
 

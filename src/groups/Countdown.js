@@ -19,7 +19,7 @@ export default class Countdown extends ReGroup{
         graphics.drawRect(0, 0, game.world.width, game.world.height)
         graphics.inputEnabled = true;
 
-        this.strokeText = this.game.add.text(0, 0, seconds, {font:`${this.customState.fontSize}px LiHei Pro Medium,Microsoft JhengHei Black`, fill:"#4B3A2F"}, this)
+        this.strokeText = this.game.add.text(0, 0, seconds, {font:`${this.customState.fontSize}px DFYuan-Md-HK-BF,LiHei Pro Medium,Microsoft JhengHei Black`, fill:"#4B3A2F"}, this)
         this.strokeText.stroke = "#ffffff"
         this.strokeText.strokeThickness = 58
         this.strokeText.setShadow(2, 2, "#333333", 2, true, true)

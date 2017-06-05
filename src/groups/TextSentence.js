@@ -10,8 +10,8 @@ export default class TextSentence extends ReGroup {
         super(game, x, y, actions)
 
         this.customState = {
-            style: { font: 'normal LiHei Pro Medium,Microsoft JhengHei',  fontSize: textSize, fill: '#000000', align:'left', tabs: [textSize*2, 0]},
-            typeStyle: { font: 'normal LiHei Pro Medium,Microsoft JhengHei',  fontSize: textSize, fill: '#008000', align:'left'},
+            style: { font: 'normal DFYuan-Md-HK-BF,LiHei Pro Medium,Microsoft JhengHei',  fontSize: textSize, fill: '#000000', align:'left', tabs: [textSize*2, 0]},
+            typeStyle: { font: 'normal DFYuan-Md-HK-BF,LiHei Pro Medium,Microsoft JhengHei',  fontSize: textSize, fill: '#008000', align:'left'},
             dragging: false,
             offTrack: false,
             parentCallback,
@@ -51,7 +51,7 @@ export default class TextSentence extends ReGroup {
             graphics.drawRect(0, textSize+(textSize/4), this.sentence.width, this.sentence.height - (textSize+10)*2)
             
             graphics.moveTo(textSize*2 ,textSize/5*3)
-            graphics.lineStyle(textSize+10, backgroundColor, 1)
+            graphics.lineStyle(textSize+15, backgroundColor, 1)
             graphics.lineTo(this.sentence.width, textSize/5*3)
 
             graphics.moveTo(0 ,this.sentence.height - textSize)

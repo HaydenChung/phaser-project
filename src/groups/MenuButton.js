@@ -12,7 +12,7 @@ export default class MenuButton extends Phaser.Group {
 
         this.textBlock = game.add.text(
             0, 0, text,
-            { font: 'bold 20pt Arial', fill: 'white', align: 'left'}, this
+            { font: 'bold 20pt DFYuan-Md-HK-BF', fill: 'white', align: 'left'}, this
         )
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)

@@ -5,7 +5,7 @@ export default class RequestFullScreen extends Phase{
 
         this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
 
-        this.requestBtn = this.game.add.text(this.world.centerX, this.world.centerY, "Play the game at fullscreen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
+        this.requestBtn = this.game.add.text(this.world.centerX, this.world.centerY, "Play the game at fullscreen", { font: 'bold 20pt DFYuan-Md-HK-BF', fill: 'red', align: 'left'})
         this.requestBtn.inputEnabled = true;
         this.requestBtn.events.onInputDown.add(this.gofull, this)
 

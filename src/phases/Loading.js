@@ -3,7 +3,7 @@ import Phase from './Phase'
 export default class extends Phase {
 
     init(){
-        this.loadingStateText = this.add.text(this.world.centerX, this.world.centerY , '0%',{ font: "65px Arial", fill: "#ff0044", align: "center" })
+        this.loadingStateText = this.add.text(this.world.centerX, this.world.centerY , '0%',{ font: "65px DFYuan-Md-HK-BF", fill: "#ff0044", align: "center" })
         this.loadingStateText.anchor.setTo(.5)
         this.load.onFileComplete.add((progress)=> {
             this.loadingStateText.text = "Loading "+progress+"%";

@@ -12,6 +12,7 @@ import PlasticBox from '../sprites/PlasticBox'
 import GameB_Track from '../groups/GameB_Track'
 import ReSprite from '../sprites/ReSprite'
 import Title from '../groups/Title'
+import ReturnButton from '../groups/ReturnButton'
 
 import { mouseOverlap } from '../actions/collisionCheck'
 import { textResort } from '../actions/textManagement'
@@ -67,11 +68,7 @@ export default class GameB_sectionB extends Phase{
 
         new Headline({game: this.game, x:0, y:0, gameName:'GameB'})
 
-        this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
-
+        new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
     }
 
     itemDropHandler(child){

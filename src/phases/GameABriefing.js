@@ -4,6 +4,7 @@ import ReGroup from '../groups/ReGroup'
 import ClickableBread from '../groups/ClickableBread'
 import Headline from '../groups/Headline'
 import Title from '../groups/Title'
+import ReturnButton from '../groups/ReturnButton'
 
 export default class Briefing extends Phase{
     preload(){
@@ -41,9 +42,6 @@ export default class Briefing extends Phase{
 
         new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
 
-        this.returnButton = this.add.text(config.widthGrid/2, config.heightGrid/2, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
+        new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
     }
 }

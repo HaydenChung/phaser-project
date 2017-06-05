@@ -14,7 +14,7 @@ export default class Scoreboard extends Phaser.Group{
 
         this.score = game.add.text(
             0, 0, `分數\n0/`+this.customState.totalScore,
-            { font: 'bold 40pt Arial', fill: 'red', align: 'left'}, this
+            { font: 'bold 40pt DFYuan-Md-HK-BF', fill: 'red', align: 'left'}, this
         )
 
         this.score.scale.setTo(config.scaleRate)

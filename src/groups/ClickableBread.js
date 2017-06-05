@@ -7,7 +7,7 @@ export default class ClickableBread extends ReGroup {
         this.spriteBlock = this.add(new Bread({game, x:0, y:0}))
         this.textBlock = game.add.text(
             0, 0, displayElm,
-            { font: 'bold 20pt LiHei Pro Medium,Microsoft JhengHei', fill: '#4B3A2F', align: 'center', backgroundColor:'rgba(255, 255, 255, 0.5)'}, this
+            { font: 'bold 20pt DFYuan-Md-HK-BF,LiHei Pro Medium,Microsoft JhengHei', fill: '#4B3A2F', align: 'center'}, this
         )
 
         this.textBlock.anchor.setTo(.5)

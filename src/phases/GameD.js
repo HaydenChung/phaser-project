@@ -5,6 +5,9 @@ import TimeCounter from '../groups/Countdown'
 import Baker from '../groups/Baker'
 import ReSprite from '../sprites/ReSprite'
 import Title from '../groups/Title'
+import ReturnButton from '../groups/ReturnButton'
+import Congratulation from '../groups/Congratulation'
+
 
 export default class GameC extends Phase{
     init(){
@@ -13,12 +16,9 @@ export default class GameC extends Phase{
 
     create(){
 
-        this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
+        new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
 
-        new Title({game: this.game, x:this.game.world.centerX, y:this.game.world.centerY, text:'麵包包裝工場', colorHex: '0172bd'})
+        new Congratulation({game: this.game, x:this.game.world.centerX, y:this.game.world.centerY, baseColor: 0x4286f4})
     }
 
     update(){

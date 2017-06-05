@@ -1,18 +1,18 @@
 import Phase from './Phase'
 import config from '../config'
 
+import Congratulation from '../groups/Congratulation'
+import ReturnButton from '../groups/ReturnButton'
+import Headline from '../groups/Headline'
+
 export default class BillBoard extends Phase{
 
     init({score}={score:0}){
         this.sources.score = score
     }
     create(){
-        this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'white', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(this.toNextPhase)
-
-        this.gamerScore = this.add.text( this.world.centerX, this.world.centerY, `Your score is \n${this.sources.score}`,  { font: 'bold 20pt Arial', fill: 'red', align: 'left'})
-        this.gamerScore.scale.setTo(config.scaleRate)
+        new Congratulation({game: this.game, x:this.world.centerX, y:this.world.centerY, baseColor:0x9242f4, text:`Your score is \n${this.sources.score}`})
+        new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
+        new Headline({game: this.game, x:0, y:0})
     }
 }

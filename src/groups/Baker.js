@@ -30,7 +30,7 @@ export default class Baker extends Phaser.Group{
 
         this.textBlock = game.add.text(
             0, -450*config.scaleRate, this.customState.tagName,
-            { font: 'bold 25pt Arial', fill: 'rgb(33, 178, 167)', align: 'left', backgroundColor:'rgba(255, 255, 255, 0.5)'},
+            { font: 'bold 25pt DFYuan-Md-HK-BF', fill: 'rgb(33, 178, 167)', align: 'left', backgroundColor:'rgba(255, 255, 255, 0.5)'},
             this
         )
         this.textBlock.anchor.setTo(.5)

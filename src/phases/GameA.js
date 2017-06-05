@@ -9,6 +9,7 @@ import GameA_Box from '../groups/GameA_Box'
 import Baker from '../groups/Baker'
 import Countdown from '../groups/Countdown'
 import Title from '../groups/Title'
+import ReturnButton from '../groups/ReturnButton'
 
 import Protal from '../sprites/Protal'
 import Character from '../sprites/Character'
@@ -63,21 +64,19 @@ export default class GameA extends Phase{
 
         this.customState.itemsCount = this.itemList.length
         this.customState.returnPoint = this.customState.itemsCount* this.itemList[0].width + this.world.width
+        
+        this.scoreboard = new Scoreboard({game: this.game, x:config.widthGrid * 7, y:this.world.height/8})
 
         this.baker = new Baker({game: this.game, x:this.world.width - targetMargin ,y: this.world.height, tagName:'麵包分發員', charIndex:0})
         this.baker.scale.setTo(.9)
         new GameA_Box({game: this.game, x:0, y: this.world.height/3*1.01})
 
-        this.scoreboard = new Scoreboard({game: this.game, x:config.widthGrid * 7, y:this.world.height/8})
         this.title = new Title({game: this.game, x:config.widthGrid * 3, y:config.heightGrid*1.2, text:"麵包配送中心", colorHex: "f7941f"})
 
         new Countdown({game: this.game, x: this.game.world.centerX, y: this.game.world.centerY, seconds: 3, callback: this.breadTrain})
         new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
 
-        this.returnButton = this.game.add.text(config.widthGrid * 8, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'black', align: 'left'})
-        this.returnButton.scale.setTo(config.scaleRate)
-        this.returnButton.inputEnabled = true;
-        this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
+        new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
 
     }
 

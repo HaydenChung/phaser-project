@@ -30,7 +30,7 @@ export default class Basket extends Phaser.Group{
 
         this.textBlock = game.add.text(
             0, 0, displayElm,
-            { font: 'bold 40pt Arial', fill: '#4B3A2F', align:'center'}, this
+            { font: 'bold 40pt DFYuan-Md-HK-BF', fill: '#4B3A2F', align:'center'}, this
         )
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)
@@ -41,7 +41,7 @@ export default class Basket extends Phaser.Group{
     addBread(breadObject){
         if(typeof breadObject.parent != undefined)breadObject.parent.remove(breadObject)
         this.backetBackGroup.add(breadObject)
-        let randomNum = Math.random()-0.45
+        let randomNum = Math.random()-0.5
         breadObject.x = this.backetBack.width/2*(randomNum)
         breadObject.y = -this.backetBack.height/5*2
         breadObject.scale.setTo(1)

@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import config from '../config'
 
 export default class ReGroup extends Phaser.Group {
-    constructor(game, x, y, actions={}){
+    constructor(game, x, y, actions={}, rescale=false){
         super(game)
 
         this.x = x;
@@ -11,5 +11,7 @@ export default class ReGroup extends Phaser.Group {
         Object.keys(actions).forEach((key)=> {
             this[key] = actions[key].bind(this)
         })
+
+        if(rescale) this.scale.setTo(config.scaleRate)
     }
 }

@@ -1,12 +1,12 @@
 import ReGroup from './ReGroup'
 
 export default class Title extends ReGroup{
-    constructor({game, x, y, text, colorHex, fontSize="30"}){
-        super(game, x, y)
+    constructor({game, x, y, text, colorHex, fontSize="40"}){
+        super(game, x, y, {}, true)
 
         this.textBlock = game.add.text(
             0, 0, text,
-            { font: `bold ${fontSize}px LiHei Pro Medium,Microsoft JhengHei`, fill: '#'+colorHex, align: 'center', backgroundColor:'rgba(255, 255, 255, 0.5)'}, this
+            { font: `bold ${fontSize}px DFYuan-Md-HK-BF,LiHei Pro Medium,Microsoft JhengHei`, fill: '#'+colorHex, align: 'center', backgroundColor:'rgba(255, 255, 255, 0.5)'}, this
         )
         this.textBlock.anchor.setTo(.5)
 
@@ -14,7 +14,6 @@ export default class Title extends ReGroup{
         graphics.beginFill(0xfffced)
         graphics.lineStyle(4, '0x'+colorHex, .3)
         graphics.drawRoundedRect(0 , 0, this.textBlock.width*1.3, this.textBlock.height*1.5, this.textBlock.height/5)
-
 
         graphics.lineWidth = 1
         graphics.beginFill('0x'+colorHex, .3)

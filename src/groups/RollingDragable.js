@@ -29,10 +29,19 @@ export default class RollingDragable extends ReGroup{
 
         this.textBlock = game.add.text(
             0, 0, displayElm,
-            { font: 'bold 20pt LiHei Pro Medium,Microsoft JhengHei', fill: '#4B3A2F', align: 'center', backgroundColor:'rgba(255, 255, 255, 0.5)'}, this
+            { font: 'bold 20pt DFYuan-Md-HK-BF,LiHei Pro Medium,Microsoft JhengHei', fill: '#4B3A2F', align: 'center'}, this
         )
         this.textBlock.anchor.setTo(.5)
         this.textBlock.scale.setTo(config.scaleRate)
+
+        this.graphics = game.add.graphics(0, 0, this)
+        this.graphics.lineStyle(0)
+        this.graphics.beginFill(0xFFFFFF, 1)
+        this.graphics.fillAlpha = .8
+        this.graphics.drawRoundedRect(-this.textBlock.width*1.1/2, -this.textBlock.height/2, this.textBlock.width*1.1, this.textBlock.height, 10)
+
+
+        this.bringToTop(this.textBlock)
 
         this.spriteBlock.inputEnabled = true;
 
@@ -40,6 +49,8 @@ export default class RollingDragable extends ReGroup{
         this.spriteBlock.events.onDragUpdate.add((sprite, pointer, dragX, dragY, snapPoint)=>{
             this.textBlock.x = dragX
             this.textBlock.y = dragY
+            this.graphics.x = dragX
+            this.graphics.y = dragY
         })
         this.spriteBlock.events.onDragStart.add(this.dragStartHandler)
         this.spriteBlock.events.onDragStop.add(this.dragStopHandler)
@@ -55,6 +66,7 @@ export default class RollingDragable extends ReGroup{
         const result = this.customState.parentCallback.itemDropHandler(this )
         this.spriteBlock.position.setTo(0)
         this.textBlock.position.setTo(0)
+        this.graphics.position.setTo(0)
         if(result === null){
             this.customState.dragging = false
             return

@@ -27,7 +27,7 @@ class Game extends Phaser.Game {
     constructor(width, height){
         super(width, height, Phaser.AUTO);
 
-        const logoSource = [
+        const loadingSources = [
             {type:'image',key:'background',url:config.httpRoot+'/assets/images/maxresdefault.jpg'},
             {type:'image',key:'begin',url:config.httpRoot+'/assets/images/begin.png'},
             {type:'image',key:'protal',url:config.httpRoot+'/assets/images/protal.png'},
@@ -41,6 +41,7 @@ class Game extends Phaser.Game {
             {type:'image',key:'gameB_shelf',url:config.httpRoot+'/assets/images/shelfs/shelf_0.png'},
             {type:'image',key:'backetOfBreads',url:config.httpRoot+'/assets/images/misc/backet_of_breads.png'},
             {type:'image',key:'hands',url:config.httpRoot+'/assets/images/characters/hands_0.png'},
+            {type:'image',key:'backBtn',url:config.httpRoot+'/assets/images/misc/back_btn.png'},
 
             {type:'audio',key:'buttonClick',url:config.httpRoot+'/assets/sounds/buttonclick.mp3'},
             {type:'audio',key:'buttonHover',url:config.httpRoot+'/assets/sounds/buttonhover.mp3'},
@@ -53,42 +54,48 @@ class Game extends Phaser.Game {
         ]
 
         for(let i=0;i<10;i++){
-            logoSource.push({
+            loadingSources.push({
                 type:'image',key:`bread_${i}`,url:config.httpRoot+`/assets/images/breads/bread_${i}.png`
             })
         }
         for(let i=0;i<5;i++){
-            logoSource.push({
+            loadingSources.push({
                 type:'image',key:`backet_${i}`,url:config.httpRoot+`/assets/images/backets/backet_${i}.png`
             })
         }
         for(let i=0;i<11;i++){
-            logoSource.push({
+            loadingSources.push({
                 type:'image',key:`belt_${i}`,url:config.httpRoot+`/assets/images/belts/belt_${i}.png`
             })
         }
 
         for(let i=0;i<3;i++){
-            logoSource.push({
+            loadingSources.push({
                 type:'image',key:`bubble_${i}`,url:config.httpRoot+`/assets/images/bubbles/Game1_bubble_${i}.png`
             })
         }
 
         for(let i=0;i<4;i++){
-            logoSource.push({
+            loadingSources.push({
                 type:'image',key:`plasticBox_${i}`,url:config.httpRoot+`/assets/images/plastic_boxs/plasticbox_${i}.png`
             })
         }
 
         for(let i=0;i<2;i++){
-            logoSource.push({
+            loadingSources.push({
                 type:'image',key:`character_${i}`,url:config.httpRoot+`/assets/images/characters/character_${i}.png`
             })
             for(let j=0;j<3;j++){
-                logoSource.push({
+                loadingSources.push({
                     type:'image',key:`face_${i}_${j}`,url:config.httpRoot+`/assets/images/characters/face_${i}_${j}.png`
                 })
             }
+        }
+
+        for(let i=0;i<5;i++){
+            loadingSources.push({
+                type:'image',key:`win_game_${i}`,url:config.httpRoot+`/assets/images/win_game/win_game_${i}.png`
+            })
         }
 
 
@@ -104,7 +111,7 @@ class Game extends Phaser.Game {
         const randGameCSources = shuffle(gameCSources)
 
         this.state.add('Boot',new Boot({nextPhase:'LogoLoading'}))
-        this.state.add('LogoLoading',new Loading({nextPhase:'HomeScreen',sources:logoSource}))
+        this.state.add('LogoLoading',new Loading({nextPhase:'HomeScreen',sources:loadingSources}))
         this.state.add('Logo',new Logo({nextPhase:'HomeScreen'}))
         this.state.add('HomeScreen',new HomeScreen({nextPhase:'GameState',gameList}))
         this.state.add('GameABriefing',new GameABriefing({nextPhase:'GameA',sources:gameASources}))        
@@ -118,7 +125,7 @@ class Game extends Phaser.Game {
         this.gameState = {
             create: ()=> {
 
-                this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt Arial', fill: 'white', align: 'left'})
+                this.returnButton = this.add.text(50*config.scaleRate, 50*config.scaleRate, "Return To Home Screen", { font: 'bold 20pt DFYuan-Md-HK-BF', fill: 'white', align: 'left'})
                 this.returnButton.scale.setTo(config.scaleRate)
                 this.returnButton.inputEnabled = true;
                 this.returnButton.events.onInputDown.add(()=> this.state.start('HomeScreen'))
@@ -163,9 +170,13 @@ class Game extends Phaser.Game {
         config.wannaHeight = Math.round(wannaHeight)
         config.scaleRate = scaleRate.toFixed(5)
         config.widthGrid = config.wannaWidth/10
-        config.heightGrid = config.wanaHeight/10
+        config.heightGrid = config.wannaHeight/10
+
+        console.log(config)
 
         this.scale.setGameSize(config.wannaWidth, config.wannaHeight);
+
+        console.log(config.widthGrid)
 
     })
 
