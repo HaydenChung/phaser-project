@@ -42,6 +42,8 @@ class Game extends Phaser.Game {
             {type:'image',key:'backetOfBreads',url:config.httpRoot+'/assets/images/misc/backet_of_breads.png'},
             {type:'image',key:'hands',url:config.httpRoot+'/assets/images/characters/hands_0.png'},
             {type:'image',key:'backBtn',url:config.httpRoot+'/assets/images/misc/back_btn.png'},
+            {type:'image',key:'tab',url:config.httpRoot+'/assets/images/misc/tab.png'},
+            {type:'image',key:'g1SelectBg',url:config.httpRoot+'/assets/images/backgrounds/g1_select_bg.png'},
 
             {type:'audio',key:'buttonClick',url:config.httpRoot+'/assets/sounds/buttonclick.mp3'},
             {type:'audio',key:'buttonHover',url:config.httpRoot+'/assets/sounds/buttonhover.mp3'},

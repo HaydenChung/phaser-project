@@ -103,7 +103,7 @@ export default class GameB_sectionB extends Phase{
         }
 
         if(typeof this.sources.items[this.customState.groupIndex] == 'undefined'){
-            this.state.start('BillBoard', true, false, {score: Math.round(this.customState.gameMark*100)})
+            this.state.start('BillBoard', true, false, {score: Math.round(this.customState.gameMark*100), textMessage:'恭喜!你已成為合格的 「麵\n包包裝員」，並已初步掌握\n辨認文體。', title:"麵包包裝工場"})
             return
         }
 

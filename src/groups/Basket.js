@@ -41,7 +41,7 @@ export default class Basket extends Phaser.Group{
     addBread(breadObject){
         if(typeof breadObject.parent != undefined)breadObject.parent.remove(breadObject)
         this.backetBackGroup.add(breadObject)
-        let randomNum = Math.random()-0.5
+        let randomNum = Math.random()*.9-0.45
         breadObject.x = this.backetBack.width/2*(randomNum)
         breadObject.y = -this.backetBack.height/5*2
         breadObject.scale.setTo(1)

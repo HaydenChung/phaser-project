@@ -24,7 +24,7 @@ export default class Baker extends Phaser.Group{
         this.character = this.add(new Character({game, x:0, y:0, charIndex}))
         this.character.reScale(1.1)
 
-        this.bread = this.add(new Bread({game, x: 0, y: -470*config.scaleRate}))
+        this.bread = this.add(new Bread({game, x: 0, y: -460*config.scaleRate, asset:'bread_9'}))
         this.bread.anchor.setTo(.5)
         this.bread.reScale(1.1)
 

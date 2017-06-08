@@ -56,7 +56,7 @@ export default class GameA extends Phase{
 
         this.sources.items[this.customState.groupIndex] = shuffle(this.sources.items[this.customState.groupIndex])
         this.itemList = this.sources.items[this.customState.groupIndex].map((source, index)=> {
-            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, displayElm: textResort(source.name, 6), matcherElm: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
+            let currItem = new RollingDragable({actions:{mouseOverlap}, game: this.game, x: -80*config.scaleRate, y: this.world.centerY, displayElm: source.name, matcherElm: source.type, parentCallback:{itemDropHandler:this.itemDropHandler}})
             currItem.scale.setTo(1.3)
             this.customState.itemsDistance.push(Math.round(index* currItem.width))
             return currItem
@@ -110,7 +110,7 @@ export default class GameA extends Phase{
         })
 
         if(this.customState.collectedCount >= this.customState.itemsCount){
-            setTimeout(this.state.start.bind(this.state, 'BillBoard', true, false, {score: Math.round(this.customState.gameMark*100)}),500)
+            setTimeout(this.state.start.bind(this.state, 'BillBoard', true, false, {score: Math.round(this.customState.gameMark*100), textMessage: '恭喜!你已成為合格的 「麵\n包分發員」，並已初步掌握\n辨認文體。', title:"麵包配送中心"}),500)
         }
         if(result === false) this.baker.wrongAnswer()
         return result;

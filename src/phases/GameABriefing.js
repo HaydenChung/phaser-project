@@ -1,6 +1,7 @@
 import Phase from './Phase'
 import config from '../config'
 import ReGroup from '../groups/ReGroup'
+import ReSprite from '../sprites/ReSprite'
 import ClickableBread from '../groups/ClickableBread'
 import Headline from '../groups/Headline'
 import Title from '../groups/Title'
@@ -19,28 +20,25 @@ export default class Briefing extends Phase{
 
     create(){
 
-        this.container = new ReGroup(this.game, config.widthGrid, config.heightGrid*2)
+        new Headline({game: this.game, x:0, y:0})
 
-        let graphics = this.game.add.graphics(0, 0)
-        graphics.beginFill(0xfffced)
-        graphics.lineStyle(config.widthGrid/4, 0xba9d75, 1)
-        graphics.drawRoundedRect(0 , 0, config.widthGrid*8, config.heightGrid*7, 30)
+        this.container = new ReGroup(this.game, config.widthGrid*0.05, config.heightGrid*0.1)
 
-        this.container.add(graphics)
+        this.container.add(new ReSprite(this.game, 0, 0, 'g1SelectBg'));
 
-        this.container.add(new Title({game: this.game, x:this.container.width/2, y:this.container.height/6, text:'請選擇題目', colorHex: 'e1a35e'}))
+        this.container.add(new Title({game: this.game, x:this.container.width/2, y:this.container.height/8, text:'請選擇題目', colorHex: 'e1a35e'}))
 
         this.sources.items.forEach((group, index)=>{
             this.container.add(new ClickableBread({
                 game: this.game, 
                 x: this.container.width/6*((index%5)+1), 
-                y: this.container.height/6*((Math.ceil((index+1)/5))+1), 
+                y: (this.container.height*.9)/5*((Math.ceil((index+1)/5)))+(this.container.height*.12), 
                 displayElm:index+1,
                 inputHandler: this.state.start.bind(this.state ,'GameA', true, false,{groupIndex:index})
             }))
         })
 
-        new Headline({game: this.game, x:0, y:0, gameName:'GameA'})
+
 
         new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
     }

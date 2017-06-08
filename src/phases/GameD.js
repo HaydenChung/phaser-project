@@ -18,7 +18,7 @@ export default class GameC extends Phase{
 
         new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
 
-        new Congratulation({game: this.game, x:this.game.world.centerX, y:this.game.world.centerY, baseColor: 0x4286f4})
+        new Congratulation({game: this.game, x:this.game.world.centerX, y:this.game.world.centerY, baseColor: 0x4286f4, score: '分數: 100/100', text:'恭喜!你已成為合格的 「麵\n包分發員」，並已初步掌握\n辨認文體。'})
     }
 
     update(){
