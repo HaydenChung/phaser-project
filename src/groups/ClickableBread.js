@@ -7,7 +7,7 @@ export default class ClickableBread extends ReGroup {
         super(game, x, y, actions)
         this.spriteBlock = this.add(new Bread({game, x:0, y:0}))
 
-        this.tab = this.add(new Tab({game, x:0, y:0, text:displayElm}))
+        this.tab = this.add(new Tab({game, x:0, y:this.spriteBlock.height/4, text:displayElm}))
 
         this.spriteBlock.reScale(.9);
         this.spriteBlock.inputEnabled = true

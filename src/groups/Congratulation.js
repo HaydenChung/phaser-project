@@ -1,9 +1,11 @@
 import ReGroup from './ReGroup'
 import ReSprite from '../sprites/ReSprite'
 import config from '../config'
+import Title from '../groups/Title'
+
 
 export default class Congratulation extends ReGroup{
-    constructor({game, x, y, baseColor, text, score}){
+    constructor({game, x, y, baseColor, text, score, title}){
         super(game, x, y)
 
         this.createShape = this.createShape.bind(this)
@@ -34,6 +36,9 @@ export default class Congratulation extends ReGroup{
         this.leftGrass.unEqualScale(-1, 1)
         this.leftGrass.tint = baseColor
         this.leftGrass.alpha = .5
+
+        this.title = this.add(new Title({game: game, x: 0, y: yGrid*-5, text:title, colorHex: "f7941f"}))
+        this.title.scale.setTo(1.2)
 
         this.gamerScore = game.add.text( 0, yGrid*-3, score , { font: 'bold 30pt DFYuan-Md-HK-BF', fill: '#9a3401', align: 'center'}, this)
         this.gamerScore.anchor.setTo(.5)

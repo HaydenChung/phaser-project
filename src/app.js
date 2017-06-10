@@ -44,6 +44,7 @@ class Game extends Phaser.Game {
             {type:'image',key:'backBtn',url:config.httpRoot+'/assets/images/misc/back_btn.png'},
             {type:'image',key:'tab',url:config.httpRoot+'/assets/images/misc/tab.png'},
             {type:'image',key:'g1SelectBg',url:config.httpRoot+'/assets/images/backgrounds/g1_select_bg.png'},
+            {type:'image',key:'winChar',url:config.httpRoot+'/assets/images/win_game/win_char.png'},
 
             {type:'audio',key:'buttonClick',url:config.httpRoot+'/assets/sounds/buttonclick.mp3'},
             {type:'audio',key:'buttonHover',url:config.httpRoot+'/assets/sounds/buttonhover.mp3'},
@@ -174,11 +175,7 @@ class Game extends Phaser.Game {
         config.widthGrid = config.wannaWidth/10
         config.heightGrid = config.wannaHeight/10
 
-        console.log(config)
-
         this.scale.setGameSize(config.wannaWidth, config.wannaHeight);
-
-        console.log(config.widthGrid)
 
     })
 
@@ -188,17 +185,37 @@ class Game extends Phaser.Game {
     }
 }
 
+class prepareFullScreen {
 
-document.querySelector('#accept_full').addEventListener('click',(ev)=>{
-    document.querySelector('#content').style.display = 'none'
-    requestFullScreen();
-    var game = new Game(config.wannaWidth, config.wannaHeight);
-})
+    constructor(){
+        console.log('invoke');
+        let contentContainer = document.querySelector('#content');
+        let message = contentContainer.querySelector('P');
+        message.innerText = 'Could you like to play the game in fullscreen?';
 
-document.querySelector('#denial_full').addEventListener('click',(ev)=>{
-    document.querySelector('#content').style.display = 'none'
-    var game = new Game(config.wannaWidth, config.wannaHeight);
-})
+        let buttonElm = document.createElement('div');
+        buttonElm.classList.add('btn');
 
+        let acceptFull = buttonElm.cloneNode();
+        acceptFull.innerText = 'Yes';
+        let denialFull = buttonElm.cloneNode();
+        denialFull.innerText = 'No';
 
-config.testing = 'testtest'
+        contentContainer.appendChild(message);
+        contentContainer.appendChild(acceptFull);
+        contentContainer.appendChild(denialFull);
+
+        acceptFull.addEventListener('click',(ev)=>{
+            contentContainer.style.display = 'none'
+            requestFullScreen();
+            var game = new Game(config.wannaWidth, config.wannaHeight);
+        })
+
+        denialFull.addEventListener('click',(ev)=>{
+            contentContainer.style.display = 'none'
+            var game = new Game(config.wannaWidth, config.wannaHeight);
+        })
+    }
+}
+
+new prepareFullScreen;

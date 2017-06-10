@@ -9,12 +9,15 @@ export default class Tab extends ReGroup {
         this.spriteBlock.anchor.setTo(.5, 1)
         this.textBlock = game.add.text(
             0, -this.height/2, text,
-            { font: 'bold 35pt DFYuan-Md-HK-BF,LiHei Pro Medium,Microsoft JhengHei', fill: '#4B3A2F', align: 'center'}, this
+            { font: '35pt DFYuan-Md-HK-BF', fill: '#2baf59', align: 'center'}, this
         )
 
         this.textBlock.stroke = "#ffffff"
         this.textBlock.strokeThickness = 16
-        this.textBlock.setShadow(1, 1, "#333333", 2, true, true)
+        this.textBlock.setShadow(0, 0, "#2baf59", 4, false, true)
+        // this.textBlock.setShadow(-2, -2, "#333333", 2, false, true)
+        // this.textBlock.setShadow(2, -2, "#333333", 2, false, true)
+        // this.textBlock.setShadow(-2, 2, "#333333", 2, false, true)
         this.textBlock.scale.setTo(config.scaleRate)
         this.textBlock.anchor.setTo(.6,.65)
 

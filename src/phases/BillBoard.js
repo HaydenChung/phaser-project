@@ -4,7 +4,7 @@ import config from '../config'
 import Congratulation from '../groups/Congratulation'
 import ReturnButton from '../groups/ReturnButton'
 import Headline from '../groups/Headline'
-import Title from '../groups/Title'
+import ReSprite from '../sprites/ReSprite'
 
 export default class BillBoard extends Phase{
 
@@ -14,8 +14,13 @@ export default class BillBoard extends Phase{
         this.sources.title = title
     }
     create(){
-        new Congratulation({game: this.game, x:this.world.centerX, y:this.world.centerY, baseColor:0x9242f4, score:`分數: ${this.sources.score}`, text: this.sources.textMessage})
-        new Title({game: this.game, x: this.game.world.centerX, y: config.heightGrid*2, text:this.sources.title, colorHex: "f7941f"}).scale.setTo(1.2)
+
+        this.bg = this.game.add.sprite(0, 0, 'bg_1_3')
+        this.bg.height = this.world.height
+        this.bg.width = this.world.width
+
+        new Congratulation({game: this.game, x:this.world.centerX, y:this.world.centerY, baseColor:0x9242f4, score:`分數: ${this.sources.score}`, text: this.sources.textMessage, title:this.sources.title})
+        this.game.add.existing(new ReSprite(this.game, config.widthGrid*8, this.world.height, 'winChar')).anchor.setTo(0.5, 1)
         new ReturnButton({game: this.game, x:config.widthGrid * 9, y:config.heightGrid})
         new Headline({game: this.game, x:0, y:0})
     }
